@@ -39,7 +39,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       {/* hide root layout for auth pages */}
       {!!isShowRootLayout ? (
         <div className="flex flex-row min-h-screen">
-          <Sidebar />
+          <Sidebar  />
           <div className="h-full flex-1">
             <Header />
             <main className="flex-1">{children}</main>
