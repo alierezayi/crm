@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { LoginFormType } from "@/lib/types";
 
 type FormType = z.infer<typeof formSchema>;
 
@@ -25,6 +26,7 @@ const formSchema = z.object({
 
 export default function SignInForm() {
   const router = useRouter();
+
   const form = useForm<FormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,10 +35,31 @@ export default function SignInForm() {
     },
   });
 
-  function onSubmit(values: FormType) {
-    console.log(values);
-    router.push("/email-verify");
-  }
+  // handle form
+  const onSubmit = async (values: LoginFormType) => {
+    try {
+      const response = await fetch(
+        "http://95.217.228.239:5000/api/Admin/login",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Login failed");
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="w-full max-w-[448px]">

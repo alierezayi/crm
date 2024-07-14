@@ -20,7 +20,6 @@ import {
   InputOTPSlot,
 } from "../ui/input-otp";
 import useOtpCounter from "@/hooks/useOtpCounter";
-import { useEffect } from "react";
 
 type FormType = z.infer<typeof formSchema>;
 
@@ -31,12 +30,10 @@ const formSchema = z.object({
 });
 
 export default function EmailVerifyForm() {
+  const email = "im1.bitcode@gmail.com";
+  
+  // counter
   const { timeLeft, formatTime } = useOtpCounter(300);
-
-  useEffect(() => {
-    const time = formatTime(timeLeft);
-    // console.log(time);
-  }, [formatTime, timeLeft]);
 
   const form = useForm<FormType>({
     resolver: zodResolver(formSchema),
@@ -45,10 +42,11 @@ export default function EmailVerifyForm() {
     },
   });
 
+  // handle form
   function onSubmit(values: FormType) {
     console.log(values);
   }
-  
+
   return (
     <div className="w-full max-w-[448px]">
       <h1 className="text-4xl mb-4 font-bold">Email verification</h1>
@@ -91,7 +89,7 @@ export default function EmailVerifyForm() {
                 </FormControl>
                 <FormDescription className="mt-4">
                   Enter the 6-digit code sent to{" "}
-                  <span className="font-bold">im1.bitcode@gmail.com</span>,
+                  <span className="font-bold">{email}</span>,
                   check your inbox.{" "}
                 </FormDescription>
                 <FormMessage />
@@ -107,7 +105,9 @@ export default function EmailVerifyForm() {
             disabled={timeLeft !== 0}
             size="lg"
             className="w-full"
-          >Resend code</Button>
+          >
+            Resend code
+          </Button>
         </form>
       </Form>
     </div>

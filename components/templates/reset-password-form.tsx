@@ -29,6 +29,7 @@ export default function EmailVerifyForm() {
     },
   });
 
+  // handle form
   function onSubmit(values: FormType) {
     console.log(values);
   }
