@@ -1,7 +1,5 @@
 import SignInForm from "@/components/templates/sign-in-form";
 
-function SignInPage() {
+export default function SignInPage() {
   return <SignInForm />;
 }
-
-export default SignInPage;

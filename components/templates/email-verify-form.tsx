@@ -35,7 +35,7 @@ export default function EmailVerifyForm() {
 
   useEffect(() => {
     const time = formatTime(timeLeft);
-    console.log(time);
+    // console.log(time);
   }, [formatTime, timeLeft]);
 
   const form = useForm<FormType>({
@@ -48,6 +48,7 @@ export default function EmailVerifyForm() {
   function onSubmit(values: FormType) {
     console.log(values);
   }
+  
   return (
     <div className="w-full max-w-[448px]">
       <h1 className="text-4xl mb-4 font-bold">Email verification</h1>
