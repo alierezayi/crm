@@ -16,6 +16,9 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LoginFormType } from "@/lib/types";
+import { loginAPI } from "@/services/auth";
+import { toast } from "sonner";
+import { useState } from "react";
 
 type FormType = z.infer<typeof formSchema>;
 
@@ -25,6 +28,8 @@ const formSchema = z.object({
 });
 
 export default function SignInForm() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
 
   const form = useForm<FormType>({
@@ -37,28 +42,41 @@ export default function SignInForm() {
 
   // handle form
   const onSubmit = async (values: LoginFormType) => {
-    try {
-      const response = await fetch(
-        "http://95.217.228.239:5000/api/Admin/login",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
+    setIsLoading(true);
 
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
+    const { res, error } = await loginAPI(values);
 
-      const data = await response.json();
-      console.log(data);
+    console.log(res);
 
-    } catch (error) {
-      console.error(error);
+    if (res.status !== 200 || error) {
+      toast("Login failed", {
+        description: error,
+        action: {
+          label: "OK",
+          onClick: () => console.log("OK"),
+        },
+      });
     }
+
+    if (res) {
+      const data = res.data;
+
+      if (data.towFactor) {
+        router.push("/two-factor");
+      } else {
+        router.push("/dashboard");
+
+        toast("Successfuly", {
+          description: data.message,
+          action: {
+            label: "OK",
+            onClick: () => console.log("OK"),
+          },
+        });
+      }
+    }
+
+    setIsLoading(false);
   };
 
   return (
@@ -107,8 +125,13 @@ export default function SignInForm() {
               </FormItem>
             )}
           />
-          <Button type="submit" size="lg" className="w-full">
-            Login
+          <Button
+            type="submit"
+            disabled={isLoading}
+            size="lg"
+            className="w-full"
+          >
+            {isLoading ? "processing . . ." : "Login"}
           </Button>
           <Button variant="ghost" size="lg" className="w-full">
             Create a new account
