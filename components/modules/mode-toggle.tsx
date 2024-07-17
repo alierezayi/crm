@@ -19,7 +19,7 @@ export function ModeToggle() {
 
   return (
     <div className="w-14 flex justify-end">
-      <Button variant="ghost" size="icon" className="rounded-full">
+      <Button variant="outline" size="icon" className="bg-transparent">
         {theme === "dark" ? (
           <Sun
             className="h-[1.2rem] w-[1.2rem]"

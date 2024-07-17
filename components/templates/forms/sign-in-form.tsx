@@ -1,5 +1,6 @@
 "use client";
 
+import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LoginFormType } from "@/lib/types";
@@ -46,11 +47,9 @@ export default function SignInForm() {
 
     const { res, error } = await loginAPI(values);
 
-    console.log(res);
-
-    if (res.status !== 200 || error) {
-      toast("Login failed", {
-        description: error,
+    if (res?.status !== 200 || error) {
+      toast.error("Login failed", {
+        description: error?.message,
         action: {
           label: "OK",
           onClick: () => console.log("OK"),
@@ -64,9 +63,14 @@ export default function SignInForm() {
       if (data.towFactor) {
         router.push("/two-factor");
       } else {
+        // set token to cookies
+        Cookies.set("accessToken", data.token, {
+          expires: 1, // 1 day
+        });
+
         router.push("/dashboard");
 
-        toast("Successfuly", {
+        toast.success("Successfuly", {
           description: data.message,
           action: {
             label: "OK",

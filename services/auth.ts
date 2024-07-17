@@ -1,49 +1,40 @@
 import api from "@/configs/api";
 import { LoginFormType } from "@/lib/types";
+import { AxiosError, AxiosResponse, isAxiosError } from "axios";
 
 interface LoginResponse {
-  res?: any;
-  error?: any;
+  res?: AxiosResponse;
+  error?: AxiosError;
 }
 
 export const loginAPI = async (data: LoginFormType): Promise<LoginResponse> => {
   try {
-    const response = await api.post(
-      "http://95.217.228.239:5000/api/Admin/login",
-      data
-    );
+    const response = await api.post("api/Admin/login", data);
 
     return { res: response };
   } catch (error) {
     console.error("Login error:", error);
 
-    return { error };
+    if (isAxiosError(error)) {
+      return { error };
+    } else {
+      throw error;
+    }
   }
 };
 
-export const login2FaAPI = async (data: any) => {
-  try {
-    const response = await api.get("api/Admin/login-2fa");
-    return { response };
-  } catch (error) {
-    return { error };
-  }
-};
-
-export const registerAPI = async (data: any) => {
-  try {
-    const response = await api.post("api/Admin/register", data);
-    return { response };
-  } catch (error) {
-    return { error };
-  }
-};
-
-export const logoutAPI = async (data: any) => {
+export const logoutAPI = async (): Promise<LoginResponse> => {
   try {
     const response = await api.get("api/Admin/logout");
-    return { response };
+
+    return { res: response };
   } catch (error) {
-    return { error };
+    console.error("Login error:", error);
+
+    if (isAxiosError(error)) {
+      return { error };
+    } else {
+      throw error;
+    }
   }
 };

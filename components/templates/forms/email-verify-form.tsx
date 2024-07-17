@@ -12,13 +12,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "../ui/input-otp";
+} from "../../ui/input-otp";
 import useOtpCounter from "@/hooks/useOtpCounter";
 
 type FormType = z.infer<typeof formSchema>;
@@ -31,7 +31,7 @@ const formSchema = z.object({
 
 export default function EmailVerifyForm() {
   const email = "im1.bitcode@gmail.com";
-  
+
   // counter
   const { timeLeft, formatTime } = useOtpCounter(300);
 
@@ -89,8 +89,7 @@ export default function EmailVerifyForm() {
                 </FormControl>
                 <FormDescription className="mt-4">
                   Enter the 6-digit code sent to{" "}
-                  <span className="font-bold">{email}</span>,
-                  check your inbox.{" "}
+                  <span className="font-bold">{email}</span>, check your inbox.{" "}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
