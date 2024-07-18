@@ -1,6 +1,5 @@
 "use client";
 
-import Cookies from "js-cookie";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,15 +16,14 @@ import { LogOut } from "lucide-react";
 import { logoutAPI } from "@/services/auth";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useSession } from "@/context/session-context";
 
 export function LogoutAlert() {
   const router = useRouter();
+  const { removeSession } = useSession();
 
   const handleLogout = async () => {
     const { res, error } = await logoutAPI();
-
-    console.log(res);
-    
 
     if (res?.status !== 200 || error) {
       toast.error("Logout failed", {
@@ -40,7 +38,7 @@ export function LogoutAlert() {
     if (res) {
       const data = res.data;
 
-      Cookies.remove("accessToken");
+      removeSession();
 
       router.push("/");
 
@@ -57,7 +55,7 @@ export function LogoutAlert() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline" size="icon" onClick={handleLogout}>
+        <Button variant="outline" size="icon">
           <LogOut className="h-[1.2rem] w-[1.2rem]" />
         </Button>
       </AlertDialogTrigger>

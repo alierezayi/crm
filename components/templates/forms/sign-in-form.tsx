@@ -20,6 +20,7 @@ import { LoginFormType } from "@/lib/types";
 import { loginAPI } from "@/services/auth";
 import { toast } from "sonner";
 import { useState } from "react";
+import { useSession } from "@/context/session-context";
 
 type FormType = z.infer<typeof formSchema>;
 
@@ -29,6 +30,7 @@ const formSchema = z.object({
 });
 
 export default function SignInForm() {
+  const { addSession } = useSession();
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
@@ -64,9 +66,7 @@ export default function SignInForm() {
         router.push("/two-factor");
       } else {
         // set token to cookies
-        Cookies.set("accessToken", data.token, {
-          expires: 1, // 1 day
-        });
+        addSession(data.token);
 
         router.push("/dashboard");
 
