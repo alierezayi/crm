@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const api = axios.create({
-  baseURL: "http://95.217.228.239:5000/",
+  baseURL: "http://manager-prop2.unfxco.com:5000/",
   headers: {
     "Content-Type": "application/json",
   },
