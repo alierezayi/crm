@@ -8,7 +8,7 @@ export default function AdminPanelLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-row min-h-screen">
+    <div className="flex flex-row min-h-screen relative">
       <Sidebar />
       <div className="h-full flex-1">
         <Header />

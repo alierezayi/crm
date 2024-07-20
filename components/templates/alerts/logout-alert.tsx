@@ -17,6 +17,7 @@ import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Cookies from "js-cookie";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export function LogoutAlert() {
   const router = useRouter();
@@ -34,9 +35,14 @@ export function LogoutAlert() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline" size="icon">
-          <LogOut className="h-[1.2rem] w-[1.2rem]" />
+        <Button size="icon" variant="ghost">
+          <LogOut className="h-[1rem] w-[1rem]" />
         </Button>
+        {/* <button>
+          <Avatar>
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </button> */}
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
