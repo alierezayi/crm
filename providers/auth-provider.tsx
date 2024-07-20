@@ -23,7 +23,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     if (error) {
-      toast.error("Error fetching profile");
+      toast.error("Error fetching profile", {
+        description: error.message,
+      });
       return;
     }
 
