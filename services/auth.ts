@@ -20,18 +20,8 @@ export const loginAPI = async (data: LoginFormType): Promise<ResponseType> => {
   }
 };
 
-export const profileAPI = async (): Promise<ResponseType> => {
-  try {
-    const response = await api.get("api/Admin/profile");
-    return { res: response };
-  } catch (error) {
-    if (isAxiosError(error)) {
-      return { error };
-    } else {
-      throw error;
-    }
-  }
-};
+export const profileAPI = () =>
+  api.get("api/Admin/profile").then((res) => res || false);
 
 export const logoutAPI = async (): Promise<ResponseType> => {
   try {

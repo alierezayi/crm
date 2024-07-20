@@ -18,8 +18,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LoginFormType } from "@/lib/types";
 import { useState } from "react";
-import { loginAPI } from "@/services/auth";
+import { loginAPI, profileAPI } from "@/services/auth";
 import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
 
 type FormType = z.infer<typeof formSchema>;
 
@@ -30,6 +31,11 @@ const formSchema = z.object({
 
 export default function SignInForm() {
   const [isLoading, setIsLoading] = useState(false);
+
+  const { refetch } = useQuery({
+    queryKey: ["profile"],
+    queryFn: profileAPI,
+  });
 
   const router = useRouter();
 
@@ -57,6 +63,7 @@ export default function SignInForm() {
         expires: 1,
       });
       router.push("/main");
+      refetch();
     }
     setIsLoading(false);
   };
