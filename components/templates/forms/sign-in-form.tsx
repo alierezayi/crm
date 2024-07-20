@@ -17,10 +17,9 @@ import { Button } from "../../ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LoginFormType } from "@/lib/types";
+import { useState } from "react";
 import { loginAPI } from "@/services/auth";
 import { toast } from "sonner";
-import { useState } from "react";
-import { useSession } from "@/context/session-context";
 
 type FormType = z.infer<typeof formSchema>;
 
@@ -30,7 +29,6 @@ const formSchema = z.object({
 });
 
 export default function SignInForm() {
-  const { addSession } = useSession();
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
@@ -44,42 +42,22 @@ export default function SignInForm() {
   });
 
   // handle form
-  const onSubmit = async (values: LoginFormType) => {
+  const onSubmit = async (credentials: LoginFormType) => {
     setIsLoading(true);
-
-    const { res, error } = await loginAPI(values);
-
-    if (res?.status !== 200 || error) {
-      toast.error("Login failed", {
-        description: error?.message,
-        action: {
-          label: "OK",
-          onClick: () => console.log("OK"),
-        },
+    const { res, error } = await loginAPI(credentials);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    const data = res?.data;
+    if (data.twoFactor) {
+      router.push("two-factor");
+    } else {
+      Cookies.set("token", data.token, {
+        expires: 1,
       });
+      router.push("/main");
     }
-
-    if (res) {
-      const data = res.data;
-
-      if (data.towFactor) {
-        router.push("/two-factor");
-      } else {
-        // set token to cookies
-        addSession(data.token);
-
-        router.push("/dashboard");
-
-        toast.success("Successfuly", {
-          description: data.message,
-          action: {
-            label: "OK",
-            onClick: () => console.log("OK"),
-          },
-        });
-      }
-    }
-
     setIsLoading(false);
   };
 
@@ -135,7 +113,7 @@ export default function SignInForm() {
             size="lg"
             className="w-full"
           >
-            {isLoading ? "processing . . ." : "Login"}
+            {isLoading ? "loading ..." : "Login"}
           </Button>
           <Button variant="ghost" size="lg" className="w-full">
             Create a new account

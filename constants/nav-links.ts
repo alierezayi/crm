@@ -1,0 +1,22 @@
+export const NAVLINKS = [
+    {id: 0, title: 'Menu', description: 'Menu', state: 0,path: 'menu'},
+    {id: 232, title: 'Stop out', description: 'Stop out', state: 1, path: '/stop-out'},
+    {id: 233, title: 'Home', description: 'Home', state: 1, path: '/home'},
+    {id: 234, title: 'Manage Roles', description: 'Manage roles', state: 1, path: '/manage-roles'},
+    {id: 235, title: 'Create new role', description: 'Create new role', state: 1, path: '/create-new-role'},
+    {id: 236, title: 'Edit role', description: 'Edit role', state: 0, path: '/edit-role'},
+    {id: 237, title: 'Edit role main', description: 'Edit role main', state: 0, path: '/edit-role-main'},
+    {id: 238, title: 'Edit role config', description: 'Edit role config', state: 0, path: '/edit-role-config'},
+    {id: 239, title: 'Edit role groups', description: 'Edit role groups', state: 0, path: '/edit-role-groups'},
+    {id: 240, title: 'Edit role Accounts Exceptions', description: 'Edit role Accounts Exceptions', state: 0, path: '/edit-role-accounts-exceptions'},
+    {id: 241, title: 'Edit role AccountsSeparate Definition', description: 'Edit role AccountsSeparate Definition', state: 0, path: '/edit-role-accountsseparate-definition'},
+    {id: 242, title: 'Get role', description: 'Get role', state: 0, path: '/get-role'},
+    {id: 243, title: 'Insert role config', description: 'Edit role config', state: 0, path: '/insert-role-config'},
+    {id: 244, title: 'Prop', description: 'Prop', state: 1, path: '/prop'},
+    {id: 245, title: 'Copy trade', description: 'Copy trade', state: 1, path: '/copy-trade'},
+    {id: 246, title: 'Report', description: 'Report', state: 0, path: '/report'},
+    {id: 247, title: 'Investors', description: 'Investors', state: 0, path: '/investors'},
+    {id: 248, title: 'Add', description: 'Add', state: 0, path: '/add'},
+    {id: 249, title: 'Remove', description: 'Remove', state: 0, path: '/remove'},
+    {id: 250, title: 'Analyze', description: 'Analyze', state: 1, path: '/analyze'}
+];

@@ -12,44 +12,23 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { LogOut } from "lucide-react";
 import { logoutAPI } from "@/services/auth";
+import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useSession } from "@/context/session-context";
+import Cookies from "js-cookie";
 
 export function LogoutAlert() {
   const router = useRouter();
-  const { removeSession } = useSession();
 
   const handleLogout = async () => {
-    const { res, error } = await logoutAPI();
-
-    if (res?.status !== 200 || error) {
-      toast.error("Logout failed", {
-        description: error?.message,
-        action: {
-          label: "OK",
-          onClick: () => console.log("OK"),
-        },
-      });
+    const { error } = await logoutAPI();
+    if (error) {
+      toast.error(error.message);
+      return;
     }
-
-    if (res) {
-      const data = res.data;
-
-      removeSession();
-
-      router.push("/");
-
-      toast.success("Successfuly", {
-        description: data,
-        action: {
-          label: "OK",
-          onClick: () => console.log("OK"),
-        },
-      });
-    }
+    Cookies.remove("token");
+    router.push("/");
   };
 
   return (
