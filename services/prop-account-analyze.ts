@@ -1,4 +1,20 @@
 import api from "@/configs/api";
+import { AxiosError, AxiosResponse, isAxiosError } from "axios";
 
-export const basicAnalyseAPI = (data: number) =>
-  api.post("PropAccountAnalyze/BasicAnalyze", data);
+interface ResponseType {
+  res?: AxiosResponse;
+  error?: AxiosError;
+}
+
+export const basicAnalyseAPI = async (data: number): Promise<ResponseType> => {
+  try {
+    const response = await api.post("PropAccountAnalyze/BasicAnalyze", data);
+    return { res: response };
+  } catch (error) {
+    if (isAxiosError(error)) {
+      return { error };
+    } else {
+      throw error;
+    }
+  }
+};
