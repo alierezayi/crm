@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
-export default function AnalyzePage() {
+export default function MainPage() {
   redirect("/analyze/overview");
 
-  return null;
+  return <div></div>;
 }

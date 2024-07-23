@@ -39,7 +39,7 @@ export default function NowStatus({
   maxBalanceEquity,
 }: NowStatusType) {
   return (
-    <Card className="w-full flex-1">
+    <Card className="w-full flex-1 md:col-span-2">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <ChartNoAxesCombined className="w-4" />

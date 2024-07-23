@@ -14,6 +14,25 @@ export type SummaryType = {
   sumWithdrawals: number;
 };
 
+export type PositionsType = {
+  ticket: number;
+  symbol: string;
+  type: number;
+  volume: number;
+  openPrice: number;
+  openTime: string;
+  stopLoss: number;
+  takeProfit: number;
+  nowPrice: number;
+  closePrice: number;
+  closeTime: string;
+  swap: number;
+  profit: number;
+  commission: number;
+  positionDuration: string;
+  reason: number;
+};
+
 export type NowStatusType = {
   equity: number;
   balance: number;

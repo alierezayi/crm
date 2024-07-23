@@ -26,7 +26,7 @@ const BasicAnalyzeProvider = ({ children }: { children: React.ReactNode }) => {
     const fetchData = async () => {
       setState((prev) => ({ ...prev, isLoading: true }));
 
-      const { res, error } = await basicAnalyseAPI(129490);
+      const { res, error } = await basicAnalyseAPI(87782);
 
       if (res) {
         setState({ isLoading: false, data: res.data, error: null });

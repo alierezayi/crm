@@ -14,7 +14,7 @@ export default function AuthProviders({
 
   useEffect(() => {
     if (session) {
-      router.push("/analyze/overview");
+      router.push("/main");
     }
   }, [session, router]);
 
