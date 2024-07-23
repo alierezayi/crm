@@ -9,7 +9,7 @@ export default function MainLayout({
 }) {
   return (
     <MainProviders>
-      <div className="flex flex-col md:flex-row justify-between md:items-center mb-5 md:mb-0">
+      <div className="flex flex-col md:flex-row justify-between gap-y-5 md:items-center md:mb-0 py-5">
         <UserInfo />
         <MainTabs />
       </div>

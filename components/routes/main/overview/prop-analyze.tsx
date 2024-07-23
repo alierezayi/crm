@@ -25,7 +25,7 @@ function PropAnalyzeItem({
     <Card className="w-full">
       <CardHeader className="pb-5">
         <CardTitle className="flex justify-between items-center">
-          <span className="rounded-full text-xl">{icon}</span>
+          <span className="rounded-full text-lg">{icon}</span>
           <Info className="w-4 h-4 text-gray-500" />
         </CardTitle>
         <CardDescription></CardDescription>
@@ -45,7 +45,7 @@ export default function PropAnalyze({
   tradeLimitTime,
 }: PropAnalyzeType) {
   return (
-    <div className="w-full grid grid-cols-2 sm:grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="w-full grid grid-cols-2 sm:grid-cols-2 gap-5 lg:grid-cols-3 xl:grid-cols-4">
       <PropAnalyzeItem
         icon={<LuCalendarDays />}
         title="Day Trade"
@@ -53,7 +53,7 @@ export default function PropAnalyze({
       />
       <PropAnalyzeItem
         icon={<MdDoneAll />}
-        title="Day Trade Complete Volume"
+        title="Complete Volume"
         value={dayTradeCompleteVolume}
       />
       <PropAnalyzeItem

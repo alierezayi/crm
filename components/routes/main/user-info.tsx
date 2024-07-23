@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { useBasicAnalyze } from "@/context/basic-analyze-context";
 import { UserIcon } from "lucide-react";
 
@@ -9,7 +10,7 @@ export default function UserInfo() {
   const userData = data?.user;
 
   return (
-    <div className="mb-5 flex items-center mt-5">
+    <div className="flex items-center">
       <div className="px-3 py-2 rounded-full bg-slate-200 dark:bg-gray-800 w-fit h-fit">
         <UserIcon className="w-4" />
       </div>
@@ -24,7 +25,7 @@ export default function UserInfo() {
               <p>{userData?.name}</p>
               <div className="flex gap-5 w-full">
                 <p className="text-gray-500">{userData?.eMail}</p>
-                <span className="text-blue-500">{userData?.login}</span>
+                <Badge>{userData?.login}</Badge>
               </div>
             </div>
           )}

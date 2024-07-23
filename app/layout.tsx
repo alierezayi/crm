@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Providers from "./providers";
+import { poppins } from "@/configs/font";
 import { cn } from "@/lib/utils";
-
-const inter = Inter({ subsets: ["latin"] });
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "text-sm scrollbar")}>
+      <body className={cn(poppins.className, "text-sm scrollbar")}>
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -31,6 +31,8 @@ const BasicAnalyzeProvider = ({ children }: { children: React.ReactNode }) => {
       if (res) {
         setState({ isLoading: false, data: res.data, error: null });
       } else if (error) {
+        console.log(error);
+        
         setState({ isLoading: false, data: undefined, error: error.message });
       }
 

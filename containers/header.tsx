@@ -10,7 +10,7 @@ export default function Header() {
   const { open } = useSidebar();
 
   return (
-    <div className="h-14 border-b flex justify-between md:justify-end items-center p-2 md:p-5">
+    <div className="h-14 border-b flex justify-between md:justify-end items-center p-2">
       <Button
         size="icon"
         variant="outline"

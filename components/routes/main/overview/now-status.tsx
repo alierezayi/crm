@@ -7,22 +7,22 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { NowStatusType } from "@/lib/types";
-
-function NowStatusItem({ item, title }: { item: number; title: string }) {
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-1 text-xs font-medium">
-        <span>{title}</span>
-        {item >= 0 ? (
-          <span className="text-green-500">{item?.toFixed(2)}</span>
-        ) : (
-          <span className="text-red-500">{item?.toFixed(2)}</span>
-        )}
-      </div>
-      <Progress value={+item?.toFixed(0)} />
-    </div>
-  );
-}
+import { TbMoneybag } from "react-icons/tb";
+import {
+  CandlestickChart,
+  FilePieChart,
+  TrendingDown,
+  TrendingUp,
+  ChartNoAxesCombined,
+  Scale,
+  ArrowBigDownDash,
+  ArrowBigUpDash,
+} from "lucide-react";
+import Image from "next/image";
+import chartUp from "@/assets/images/chart-up.svg";
+import chartDown from "@/assets/images/chart-down.svg";
+import { Separator } from "@/components/ui/separator";
+import { MdShowChart } from "react-icons/md";
 
 export default function NowStatus({
   equity,
@@ -39,33 +39,120 @@ export default function NowStatus({
   maxBalanceEquity,
 }: NowStatusType) {
   return (
-    <Card className="w-full flex-1 xl:flex-[2]">
+    <Card className="w-full flex-1">
       <CardHeader>
-        <CardTitle>Status</CardTitle>
+        <CardTitle className="flex items-center gap-2">
+          <ChartNoAxesCombined className="w-4" />
+          Now Status
+        </CardTitle>
         <CardDescription>Now Status</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col xl:flex-row gap-5">
-        <div className="flex flex-col gap-2 w-full">
-          <NowStatusItem title="Equity" item={equity} />
-          <NowStatusItem title="Balance" item={balance} />
-          <NowStatusItem title="Margin" item={margin} />
-          <NowStatusItem title="Margin Percent" item={marginPercent} />
-          <NowStatusItem title="Margin Level" item={marginLevel} />
-          <NowStatusItem title="Free Margin" item={freeMargin} />
-          <NowStatusItem
-            title="Free Margin Drawdown"
-            item={freeMarginDrawdown}
-          />
-          <NowStatusItem title="Now Profit" item={profit} />
+      <CardContent className="flex flex-col gap-4">
+        <div className="flex items-center justify-between w-full font-medium">
+          <h2 className="text-lg ">Equity</h2>
+          {equity >= 0 ? (
+            <div className="text-emerald-600 dark:text-emerald-400 flex gap-5 items-end">
+              <span className="text-base -my-1.5">{equity?.toFixed(2)}</span>
+              <Image src={chartUp} alt="chart" width={70} height={20} />
+            </div>
+          ) : (
+            <div className="text-rose-600 dark:text-rose-400 flex gap-2 items-center">
+              <span>{equity?.toFixed(2)}</span>
+              <Image src={chartDown} alt="chart" width={70} height={20} />
+            </div>
+          )}
         </div>
-        <div className="flex flex-col gap-2 w-full">
-          <NowStatusItem
-            title="Start Balance Drawdown"
-            item={startBalanceDrawdown}
-          />
-          <NowStatusItem title="Relative Drawdown" item={relativeDrawdown} />
-          <NowStatusItem title="Min Balance Equity" item={minBalanceEquity} />
-          <NowStatusItem title="Max Balance Equity" item={maxBalanceEquity} />
+        <div>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Scale className="w-4 h-4" /> Balance
+              </CardTitle>
+              <CardDescription className="flex items-center gap-2 mt-1.5">
+                {balance}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-5">
+                  <div className="flex gap-1">
+                    <ArrowBigUpDash className="w-4 h-4" />
+                    <span>Max Balance Equity </span>
+                  </div>
+                  <span className="text-gray-500">{minBalanceEquity}</span>
+                </div>
+                <div className="flex items-center gap-5">
+                  <div className="flex gap-1">
+                    <ArrowBigDownDash className="w-4 h-4" />
+                    <span>Min Balance Equity </span>
+                  </div>
+                  <span className="text-gray-500">{minBalanceEquity}</span>
+                </div>
+                <div className="flex items-center gap-5">
+                  <div className="flex gap-1">
+                    <MdShowChart className="w-4 h-4" />
+                    <span>Start Balance Draw Down</span>
+                  </div>
+                  <span className="text-gray-500">{minBalanceEquity}</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+        <Separator />
+        <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1">
+            <div className="flex w-full items-center justify-between text- font-semibold">
+              <div className="">Margin</div>
+              <div>
+                <span className="mr-1">{margin}</span> ({marginPercent}%)
+              </div>
+            </div>
+            <Progress value={marginPercent} />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {/* <Card>
+            <CardHeader >
+              <CardTitle className="flex items-center gap-2">Margin</CardTitle>
+              <CardDescription>
+                <div className="text-end mb-1">
+                  <span className="mr-1">{margin}</span> ({marginPercent}%)
+                </div>
+                <Progress value={marginPercent} />
+              </CardDescription>
+            </CardHeader>
+          </Card> */}
+          <Card
+          // className="border-none bg-gray-100 dark:bg-gray-900"
+          >
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                Free Margin
+              </CardTitle>
+              <CardDescription>{freeMargin}</CardDescription>
+            </CardHeader>
+          </Card>
+          <Card
+          // className="border-none bg-gray-100 dark:bg-gray-900"
+          >
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 truncate">
+                Margin Drawdown
+              </CardTitle>
+              <CardDescription>{freeMarginDrawdown}</CardDescription>
+            </CardHeader>
+          </Card>
+          <Card
+          // className="border-none bg-gray-100 dark:bg-gray-900"
+          >
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                Margin Level
+              </CardTitle>
+              <CardDescription>{marginLevel}</CardDescription>
+            </CardHeader>
+          </Card>
         </div>
       </CardContent>
     </Card>

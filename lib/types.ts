@@ -42,3 +42,21 @@ export type PropAnalyzeType = {
   limitVolume: number;
   tradeLimitTime: number;
 };
+
+export type TradeStatusType = {
+  countTrades: number;
+  countProfitTrades: number;
+  countProfitTradesPercentage: number;
+  countLossTrades: number;
+  countLossTradesPercentage: number;
+  profitFactor: number;
+  countMobileTrading: number;
+  countMobileTradingPercentage: number;
+  countClientTrading: number;
+  countClientTradingPercentage: number;
+  countWebTrading: number;
+  countWebTradingPercentage: number;
+  countAlgoTrading: number;
+  countAlgoTradingPercentage: number;
+  countDayTrade: number;
+};
