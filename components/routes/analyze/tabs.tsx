@@ -6,9 +6,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { href: "/main/overview", label: "Overview" },
-  { href: "/main/history-positions", label: "History Positions" },
-  { href: "/main/user-ips", label: "User IPs" },
+  { href: "/analyze/overview", label: "Overview" },
+  { href: "/analyze/history-positions", label: "History Positions" },
+  { href: "/analyze/user-ips", label: "User IPs" },
 ];
 
 export default function MainTabs() {

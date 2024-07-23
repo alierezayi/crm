@@ -1,5 +1,5 @@
-import MainTabs from "@/components/routes/main/tabs";
-import UserInfo from "@/components/routes/main/user-info";
+import MainTabs from "@/components/routes/analyze/tabs";
+import UserInfo from "@/components/routes/analyze/user-info";
 import MainProviders from "./providers";
 
 export default function MainLayout({
