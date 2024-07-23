@@ -47,9 +47,9 @@ export default function NowStatus({
         </CardTitle>
         <CardDescription>Now Status</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col gap-4">
+      <CardContent className="flex flex-col gap-4 w-full">
         <div className="flex items-center justify-between w-full font-medium">
-          <h2 className="text-lg ">Equity</h2>
+          <h2 className="text-lg -mb-1.5">Equity</h2>
           {equity >= 0 ? (
             <div className="text-emerald-600 dark:text-emerald-400 flex gap-5 items-end">
               <span className="text-base -my-1.5">{equity?.toFixed(2)}</span>
@@ -62,47 +62,77 @@ export default function NowStatus({
             </div>
           )}
         </div>
-        <div>
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Scale className="w-4 h-4" /> Balance
-              </CardTitle>
-              <CardDescription className="flex items-center gap-2 mt-1.5">
-                {balance}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-5">
-                  <div className="flex gap-1">
-                    <ArrowBigUpDash className="w-4 h-4" />
-                    <span>Max Balance Equity </span>
-                  </div>
-                  <span className="text-gray-500">{minBalanceEquity}</span>
-                </div>
-                <div className="flex items-center gap-5">
-                  <div className="flex gap-1">
-                    <ArrowBigDownDash className="w-4 h-4" />
-                    <span>Min Balance Equity </span>
-                  </div>
-                  <span className="text-gray-500">{minBalanceEquity}</span>
-                </div>
-                <div className="flex items-center gap-5">
-                  <div className="flex gap-1">
-                    <MdShowChart className="w-4 h-4" />
-                    <span>Start Balance Draw Down</span>
-                  </div>
-                  <span className="text-gray-500">{minBalanceEquity}</span>
-                </div>
+        <div className="flex flex-col gap-5">
+          <div>
+            <h2 className="flex items-center gap-2">
+              <Scale className="w-4 h-4" /> Balance
+            </h2>
+            <div className="flex items-center gap-2 mt-1.5 text-muted-foreground">
+              {balance}
+            </div>
+          </div>
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-5">
+              <div className="flex gap-2">
+                <TrendingUp className="w-4 h-4" />
+                <span>Profit</span>
               </div>
-            </CardContent>
-          </Card>
+              <span className="text-muted-foreground">
+                {profit?.toFixed(2)}
+              </span>
+            </div>
+            <div className="flex items-center gap-5">
+              <div className="flex gap-2">
+                <MdShowChart className="w-4 h-4" />
+                <span>Start Balance Draw Down</span>
+              </div>
+              <span className="text-muted-foreground">
+                {startBalanceDrawdown}
+              </span>
+            </div>
+            <div className="flex items-center gap-5">
+              <div className="flex gap-2">
+                <ArrowBigUpDash className="w-4 h-4" />
+                <span>Max Balance Equity </span>
+              </div>
+              <span className="text-muted-foreground">{maxBalanceEquity}</span>
+            </div>
+            <div className="flex items-center gap-5">
+              <div className="flex gap-2">
+                <ArrowBigDownDash className="w-4 h-4" />
+                <span>Min Balance Equity </span>
+              </div>
+              <span className="text-muted-foreground">{minBalanceEquity}</span>
+            </div>
+            <div className="flex items-center gap-5">
+              <div className="flex gap-2">
+                <MdShowChart className="w-4 h-4" />
+                <span>RelativeDrawdown</span>
+              </div>
+              <span className="text-muted-foreground">{relativeDrawdown}</span>
+            </div>
+          </div>
+          {/* <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-5">
+              <div className="flex gap-2">
+                <TrendingUp className="w-4 h-4" />
+                <span>Profit </span>
+              </div>
+              <span className="text-muted-foreground">{profit}</span>
+            </div>
+            <div className="flex items-center gap-5">
+              <div className="flex gap-2">
+                <MdShowChart className="w-4 h-4" />
+                <span>Relative Drawdown</span>
+              </div>
+              <span className="text-muted-foreground">{relativeDrawdown}</span>
+            </div>
+          </div> */}
         </div>
         <Separator />
         <div className="flex flex-col gap-1">
           <div className="flex flex-col gap-1">
-            <div className="flex w-full items-center justify-between text- font-semibold">
+            <div className="flex w-full items-center justify-between text-xs font-medium">
               <div className="">Margin</div>
               <div>
                 <span className="mr-1">{margin}</span> ({marginPercent}%)
@@ -112,17 +142,6 @@ export default function NowStatus({
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          {/* <Card>
-            <CardHeader >
-              <CardTitle className="flex items-center gap-2">Margin</CardTitle>
-              <CardDescription>
-                <div className="text-end mb-1">
-                  <span className="mr-1">{margin}</span> ({marginPercent}%)
-                </div>
-                <Progress value={marginPercent} />
-              </CardDescription>
-            </CardHeader>
-          </Card> */}
           <Card
           // className="border-none bg-gray-100 dark:bg-gray-900"
           >
