@@ -17,8 +17,8 @@ import { PositionsAndOrdersType } from "@/lib/types";
 import { LayoutList } from "lucide-react";
 
 export default function PositionsAndOrders({
-  positions,
-  orders,
+  positions = [],
+  orders = [],
 }: {
   positions: PositionsAndOrdersType[];
   orders: PositionsAndOrdersType[];
@@ -58,6 +58,7 @@ export default function PositionsAndOrders({
             </TableRow>
           </TableHeader>
           <TableBody>
+            {mergedItems.length < 0 && <div className="w-full flex justify-center">No item exist.</div>}
             {mergedItems.map(
               (
                 {

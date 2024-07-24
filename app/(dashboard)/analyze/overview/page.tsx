@@ -1,5 +1,6 @@
 "use client";
 
+import ChartContainer from "@/components/routes/analyze/overview/chart-container";
 import NowStatus from "@/components/routes/analyze/overview/now-status";
 import PositionsAndOrders from "@/components/routes/analyze/overview/positions-and-orders";
 import PropAnalyze from "@/components/routes/analyze/overview/prop-analyze";
@@ -16,6 +17,8 @@ export default function OverviewPage() {
   const propAnalyze = data?.propAnalyze;
   const positions = data?.positions;
   const orders = data?.orders;
+  const historyBalance = data?.historyBalance;
+  const historyGrowth = data?.historyGrowth;
 
   return (
     <>
@@ -27,6 +30,10 @@ export default function OverviewPage() {
           <div className="grid grid-cols-1 lg:grid-cols-4 mt-5 gap-5">
             <Summary {...summary} />
             <PositionsAndOrders orders={orders} positions={positions} />
+            <ChartContainer
+              historyBalance={historyBalance}
+              historyGrowth={historyGrowth}
+            />
             <TradeStatus {...tradeStatus} />
             <NowStatus {...nowStatus} />
           </div>

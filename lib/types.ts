@@ -14,6 +14,11 @@ export type SummaryType = {
   sumWithdrawals: number;
 };
 
+export type HistoryChartType = {
+  time: string;
+  balance: number;
+};
+
 export type PositionsAndOrdersType = {
   ticket: number;
   symbol: string;
