@@ -1,7 +1,7 @@
 "use client";
 
 import NowStatus from "@/components/routes/analyze/overview/now-status";
-import Positions from "@/components/routes/analyze/overview/positions";
+import PositionsAndOrders from "@/components/routes/analyze/overview/positions-and-orders";
 import PropAnalyze from "@/components/routes/analyze/overview/prop-analyze";
 import Summary from "@/components/routes/analyze/overview/summary";
 import TradeStatus from "@/components/routes/analyze/overview/trade-status";
@@ -15,6 +15,7 @@ export default function OverviewPage() {
   const tradeStatus = data?.countTrade;
   const propAnalyze = data?.propAnalyze;
   const positions = data?.positions;
+  const orders = data?.orders;
 
   return (
     <>
@@ -23,9 +24,9 @@ export default function OverviewPage() {
       ) : (
         <div>
           <PropAnalyze {...propAnalyze} />
-          <div className="grid md:grid-cols-4 mt-5 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-4 mt-5 gap-5">
             <Summary {...summary} />
-            <Positions {...positions} />
+            <PositionsAndOrders orders={orders} positions={positions} />
             <TradeStatus {...tradeStatus} />
             <NowStatus {...nowStatus} />
           </div>

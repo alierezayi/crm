@@ -39,7 +39,7 @@ export default function NowStatus({
   maxBalanceEquity,
 }: NowStatusType) {
   return (
-    <Card className="w-full flex-1 md:col-span-2">
+    <Card className="lg:col-span-4 xl:col-span-2">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <ChartNoAxesCombined className="w-4" />
@@ -65,17 +65,17 @@ export default function NowStatus({
         <div className="flex flex-col gap-5">
           <div>
             <h2 className="flex items-center gap-2">
-              <Scale className="w-4 h-4" /> Balance
+              <TrendingUp className="w-4 h-4" /> Profit
             </h2>
             <div className="flex items-center gap-2 mt-1.5 text-muted-foreground">
-              {balance}
+              {profit}
             </div>
           </div>
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-5">
               <div className="flex gap-2">
-                <TrendingUp className="w-4 h-4" />
-                <span>Profit</span>
+                <Scale className="w-4 h-4" />
+                <span>Balance</span>
               </div>
               <span className="text-muted-foreground">
                 {profit?.toFixed(2)}

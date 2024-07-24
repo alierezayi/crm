@@ -29,6 +29,8 @@ const BasicAnalyzeProvider = ({ children }: { children: React.ReactNode }) => {
       const { res, error } = await basicAnalyseAPI(87782);
 
       if (res) {
+        console.log(res);
+        
         setState({ isLoading: false, data: res.data, error: null });
       } else if (error) {
         setState({ isLoading: false, data: undefined, error: error.message });

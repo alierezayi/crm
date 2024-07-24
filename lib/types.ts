@@ -14,7 +14,7 @@ export type SummaryType = {
   sumWithdrawals: number;
 };
 
-export type PositionsType = {
+export type PositionsAndOrdersType = {
   ticket: number;
   symbol: string;
   type: number;

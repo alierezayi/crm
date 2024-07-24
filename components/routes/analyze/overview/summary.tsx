@@ -40,7 +40,7 @@ export default function Summary({
   sumWithdrawals,
 }: SummaryType) {
   return (
-    <Card className="">
+    <Card className="lg:col-span-4 xl:col-span-2 2xl:col-span-1">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <LayoutList className="w-4" />

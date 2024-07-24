@@ -65,7 +65,7 @@ export default function TradeStatus({
   countDayTrade,
 }: TradeStatusType) {
   return (
-    <Card className="w-full flex-1 md:col-span-2">
+    <Card className="lg:col-span-4 xl:col-span-2">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <CandlestickChart className="w-4" />
