@@ -20,6 +20,9 @@ export default function OverviewPage() {
   const historyBalance = data?.historyBalance;
   const historyGrowth = data?.historyGrowth;
 
+  // console.log(data);
+  
+
   return (
     <>
       {isLoading ? (

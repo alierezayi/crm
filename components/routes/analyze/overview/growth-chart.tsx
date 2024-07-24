@@ -14,7 +14,7 @@ export default function GrowthChart({
   activeChart: "views" | "balance" | "growth";
   chartData: HistoryChartType[];
 }) {
-  if (!activeChart) return null;
+  if (activeChart !== "growth") return null;
 
   return (
     <ChartContainer

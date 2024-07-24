@@ -6,9 +6,9 @@ interface ResponseType {
   error?: AxiosError;
 }
 
-export const basicAnalyseAPI = async (data: number): Promise<ResponseType> => {
+export const basicAnalyseAPI = async (code: number): Promise<ResponseType> => {
   try {
-    const response = await api.post("PropAccountAnalyze/BasicAnalyze", data);
+    const response = await api.post("PropAccountAnalyze/BasicAnalyze", code);
     return { res: response };
   } catch (error) {
     if (isAxiosError(error)) {

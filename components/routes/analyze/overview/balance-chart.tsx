@@ -14,7 +14,10 @@ export default function BalanceChart({
   activeChart: "views" | "balance" | "growth";
   chartData: HistoryChartType[];
 }) {
-  if (!activeChart) return null;
+  if (activeChart !== "balance") return null;
+
+  // console.log(chartData);
+  
 
   return (
     <ChartContainer

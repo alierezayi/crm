@@ -26,16 +26,18 @@ export default function HistoryChart({
     useState<keyof typeof chartConfig>("balance");
 
   const newBalanceData = historyBalance?.map((item: any) => {
-    const newDateString = item.time.split("T")[0];
+    const newDateString = item.time?.split("T")[0];
     delete item.time;
     return {
       ...item,
       date: newDateString,
     };
   });
+  // console.log(historyBalance);
+  
 
   const newGrowthData = historyGrowth?.map((item: any) => {
-    const newDateString = item.time.split("T")[0];
+    const newDateString = item.time?.split("T")[0];
     delete item.time;
     return {
       ...item,
