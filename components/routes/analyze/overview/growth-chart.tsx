@@ -1,30 +1,32 @@
+"use client";
+
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { growthChartConfig } from "@/configs/chart";
 import { HistoryChartType } from "@/lib/types";
-import { LineChart, CartesianGrid, XAxis, Line } from "recharts";
+import { growthChartConfig } from "@/configs/chart";
 
-export default function GrowthChart({
-  chartData,
-  activeChart,
-}: {
-  activeChart: "views" | "balance" | "growth";
-  chartData: HistoryChartType[];
-}) {
-  if (activeChart !== "growth") return null;
-  console.log(chartData);
+export function GrowthChart({ chartData }: { chartData: HistoryChartType[] }) {
+  const newChartData = chartData?.map((item: any) => {
+    const date = item.time?.split("T")[0];
+    const growth = item.balance;
+    return {
+      growth,
+      date,
+    };
+  });
 
   return (
     <ChartContainer
       config={growthChartConfig}
-      className="aspect-auto h-[300px] w-full"
+      className="aspect-auto h-[310px] w-full"
     >
-      <LineChart
+      <AreaChart
         accessibilityLayer
-        data={chartData}
+        data={newChartData}
         margin={{
           left: 12,
           right: 12,
@@ -60,14 +62,14 @@ export default function GrowthChart({
             />
           }
         />
-        <Line
-          dataKey={activeChart}
-          type="monotone"
-          stroke={`var(--color-${activeChart})`}
-          strokeWidth={2}
-          dot={false}
+        <Area
+          dataKey="growth"
+          type="natural"
+          fill="var(--color-growth)"
+          fillOpacity={0.4}
+          stroke="var(--color-growth)"
         />
-      </LineChart>
+      </AreaChart>
     </ChartContainer>
   );
 }

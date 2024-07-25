@@ -1,32 +1,32 @@
+"use client";
+
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { balanceChartConfig } from "@/configs/chart";
 import { HistoryChartType } from "@/lib/types";
-import { LineChart, CartesianGrid, XAxis, Line } from "recharts";
+import { balanceChartConfig } from "@/configs/chart";
 
-export default function BalanceChart({
-  chartData,
-  activeChart,
-}: {
-  activeChart: "views" | "balance" | "growth";
-  chartData: HistoryChartType[];
-}) {
-  if (activeChart !== "balance") return null;
-
-  // console.log(chartData);
-  
+export function BalanceChart({ chartData }: { chartData: HistoryChartType[] }) {
+  const newChartData = chartData?.map((item: any) => {
+    const newDateString = item.time?.split("T")[0];
+    delete item.time;
+    return {
+      ...item,
+      date: newDateString,
+    };
+  });
 
   return (
     <ChartContainer
       config={balanceChartConfig}
-      className="aspect-auto h-[300px] w-full"
+      className="aspect-auto h-[310px] w-full"
     >
-      <LineChart
+      <AreaChart
         accessibilityLayer
-        data={chartData}
+        data={newChartData}
         margin={{
           left: 12,
           right: 12,
@@ -62,14 +62,14 @@ export default function BalanceChart({
             />
           }
         />
-        <Line
-          dataKey={activeChart}
-          type="monotone"
-          stroke={`var(--color-${activeChart})`}
-          strokeWidth={2}
-          dot={false}
+        <Area
+          dataKey="balance"
+          type="natural"
+          fill="var(--color-balance)"
+          fillOpacity={0.4}
+          stroke="var(--color-balance)"
         />
-      </LineChart>
+      </AreaChart>
     </ChartContainer>
   );
 }
