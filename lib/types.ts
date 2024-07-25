@@ -23,6 +23,7 @@ export type PositionsAndOrdersType = {
   ticket: number;
   symbol: string;
   type: number;
+  typeString: string | null;
   volume: number;
   openPrice: number;
   openTime: string;

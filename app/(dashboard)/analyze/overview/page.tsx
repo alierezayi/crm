@@ -20,9 +20,6 @@ export default function OverviewPage() {
   const historyBalance = data?.historyBalance;
   const historyGrowth = data?.historyGrowth;
 
-  // console.log(data);
-  
-
   return (
     <>
       {isLoading ? (
@@ -33,10 +30,10 @@ export default function OverviewPage() {
           <div className="grid grid-cols-1 lg:grid-cols-4 mt-5 gap-5">
             <Summary {...summary} />
             <PositionsAndOrders orders={orders} positions={positions} />
-            <ChartContainer
+            {/* <ChartContainer
               historyBalance={historyBalance}
               historyGrowth={historyGrowth}
-            />
+            /> */}
             <TradeStatus {...tradeStatus} />
             <NowStatus {...nowStatus} />
           </div>

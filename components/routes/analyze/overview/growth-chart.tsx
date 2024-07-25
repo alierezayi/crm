@@ -15,6 +15,7 @@ export default function GrowthChart({
   chartData: HistoryChartType[];
 }) {
   if (activeChart !== "growth") return null;
+  console.log(chartData);
 
   return (
     <ChartContainer
