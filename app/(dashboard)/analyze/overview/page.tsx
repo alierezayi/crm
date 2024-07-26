@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
+import ChartDrawdown from "@/components/routes/analyze/overview/chart-drawdown";
 
 export default function OverviewPage() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function OverviewPage() {
   const orders = data?.orders;
   const historyBalance = data?.historyBalance;
   const historyGrowth = data?.historyGrowth;
+  const loginCode = data?.user.login;
 
   useEffect(() => {
     if (error?.response?.status === 401) {
@@ -58,6 +60,7 @@ export default function OverviewPage() {
                 <TradeStatus {...tradeStatus} />
                 <NowStatus {...nowStatus} />
                 <TableContainer orders={orders} positions={positions} />
+                <ChartDrawdown loginCode={loginCode} />
               </div>
             </div>
           )}

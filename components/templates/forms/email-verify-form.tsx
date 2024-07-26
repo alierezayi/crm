@@ -96,13 +96,13 @@ export default function EmailVerifyForm() {
             )}
           />
 
-          <Button type="submit" size="lg" className="w-full">
+          <Button type="submit"  className="w-full">
             Verify
           </Button>
           <Button
             variant="ghost"
             disabled={timeLeft !== 0}
-            size="lg"
+            
             className="w-full"
           >
             Resend code

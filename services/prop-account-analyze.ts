@@ -18,3 +18,21 @@ export const basicAnalyseAPI = async (code: number): Promise<ResponseType> => {
     }
   }
 };
+
+export const chartDrawdownAnalyzeAPI = async (
+  code: number
+): Promise<ResponseType> => {
+  try {
+    const response = await api.post(
+      "PropAccountAnalyze/ChartDrawdownAnalyze",
+      code
+    );
+    return { res: response };
+  } catch (error) {
+    if (isAxiosError(error)) {
+      return { error };
+    } else {
+      throw error;
+    }
+  }
+};

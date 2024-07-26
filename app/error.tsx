@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
+import ErrorContainer from "@/containers/error";
 
 export default function Error({
   error,
@@ -15,8 +16,8 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <h2 className="block text-red-500">Something went wrong!</h2>
+    <div className="h-screen flex justify-center items-center">
+      <ErrorContainer message={error.message} />
       <Button onClick={() => reset()}>Try again</Button>
     </div>
   );

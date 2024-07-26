@@ -15,19 +15,25 @@ export default function UserInfo() {
         <UserIcon className="w-4" />
       </div>
       {isLoading ? (
-        <div className="ml-5">Loading . . .</div>
+        <div className="ml-5 truncate">Loading . . .</div>
       ) : (
         <>
           {error ? (
             <div className="ml-5">Error fetching user data</div>
           ) : (
-            <div className="ml-5 text-xs flex-1">
-              <p>{userData?.name}</p>
-              <div className="flex gap-5 w-full">
-                <p className="text-gray-500">{userData?.eMail}</p>
-                <Badge>{userData?.login}</Badge>
-              </div>
-            </div>
+            <>
+              {data ? (
+                <div className="ml-5 text-xs flex-1">
+                  <p>{userData?.name}</p>
+                  <div className="flex gap-5 w-full">
+                    <p className="text-gray-500">{userData?.eMail}</p>
+                    <Badge>{userData?.login}</Badge>
+                  </div>
+                </div>
+              ) : (
+                <div className="truncate ml-5">User not founded.</div>
+              )}
+            </>
           )}
         </>
       )}

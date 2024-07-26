@@ -60,7 +60,7 @@ export default function EmailVerifyForm() {
             )}
           />
 
-          <Button type="submit" size="lg" className="w-full">
+          <Button type="submit" className="w-full">
             Reset
           </Button>
         </form>

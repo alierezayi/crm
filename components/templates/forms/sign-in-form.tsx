@@ -117,12 +117,12 @@ export default function SignInForm() {
           <Button
             type="submit"
             disabled={isLoading}
-            size="lg"
+            
             className="w-full"
           >
             {isLoading ? "loading ..." : "Login"}
           </Button>
-          <Button variant="ghost" size="lg" className="w-full">
+          <Button variant="ghost"  className="w-full">
             Create a new account
           </Button>
         </form>

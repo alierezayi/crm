@@ -15,7 +15,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="flex items-center gap-2 w-full sm:max-w-xs">
+    <div className="flex items-center gap-2 w-full sm:max-w-sm">
       <Input
         type="number"
         onChange={(e) => setValue(+e.target.value)}
@@ -25,7 +25,6 @@ export default function SearchBar() {
         className="flex-1"
       />
       <Button
-        variant="secondary"
         disabled={isLoading}
         size="icon"
         onClick={handleSearch}
