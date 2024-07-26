@@ -1,11 +1,9 @@
 "use client";
 
+import React from "react";
 import BasicAnalyzeProvider from "@/context/basic-analyze-context";
-import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
 
-export default function MainProviders({
+export default function AnalyzeProviders({
   children,
 }: {
   children: React.ReactNode;

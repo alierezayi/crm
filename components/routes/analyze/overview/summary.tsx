@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { SummaryType } from "@/lib/types";
 import { LayoutList, TrendingDown, TrendingUp } from "lucide-react";
@@ -46,7 +45,6 @@ export default function Summary({
           <LayoutList className="w-4" />
           Sammary
         </CardTitle>
-
         <CardDescription>Summery of account</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-2">

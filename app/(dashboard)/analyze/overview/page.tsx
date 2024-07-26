@@ -4,12 +4,18 @@ import NowStatus from "@/components/routes/analyze/overview/now-status";
 import PropAnalyze from "@/components/routes/analyze/overview/prop-analyze";
 import Summary from "@/components/routes/analyze/overview/summary";
 import TradeStatus from "@/components/routes/analyze/overview/trade-status";
+import Error from "@/containers/error";
 import ChartContainer from "@/containers/routes/analyze/overview/chart-container";
 import TableContainer from "@/containers/routes/analyze/overview/table-container";
 import { useBasicAnalyze } from "@/context/basic-analyze-context";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { toast } from "sonner";
 
 export default function OverviewPage() {
-  const { data, isLoading } = useBasicAnalyze();
+  const router = useRouter();
+  const { data, isLoading, error } = useBasicAnalyze();
 
   const summary = data?.summary;
   const nowStatus = data?.nowStatus;
@@ -20,24 +26,42 @@ export default function OverviewPage() {
   const historyBalance = data?.historyBalance;
   const historyGrowth = data?.historyGrowth;
 
+  useEffect(() => {
+    if (error?.response?.status === 401) {
+      toast.error("Token Expired", {
+        description: "Logging out of account.",
+      });
+      Cookies.remove("token");
+      router.push("/");
+    }
+  }, [error]);
+
   return (
     <>
       {isLoading ? (
         <div>loading ...</div>
       ) : (
-        <div>
-          <PropAnalyze {...propAnalyze} />
-          <div className="grid grid-cols-1 lg:grid-cols-4 mt-5 gap-5">
-            <TableContainer orders={orders} positions={positions} />
-            <ChartContainer
-              historyBalance={historyBalance}
-              historyGrowth={historyGrowth}
-            />
-            <Summary {...summary} />
-            <TradeStatus {...tradeStatus} />
-            <NowStatus {...nowStatus} />
-          </div>
-        </div>
+        <>
+          {error && error?.response?.status !== 400 && (
+            <Error message="Unexpected error." />
+          )}
+          {error?.response?.status === 400 && <div>User not founded.</div>}
+          {data && (
+            <div>
+              <PropAnalyze {...propAnalyze} />
+              <div className="grid grid-cols-1 lg:grid-cols-4 mt-5 gap-5">
+                <ChartContainer
+                  historyBalance={historyBalance}
+                  historyGrowth={historyGrowth}
+                />
+                <Summary {...summary} />
+                <TradeStatus {...tradeStatus} />
+                <NowStatus {...nowStatus} />
+                <TableContainer orders={orders} positions={positions} />
+              </div>
+            </div>
+          )}
+        </>
       )}
     </>
   );

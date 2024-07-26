@@ -1,48 +1,47 @@
 import { basicAnalyseAPI } from "@/services/prop-account-analyze";
+import { AxiosError } from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type StateType = {
   isLoading: boolean;
   data: any;
-  error: string | null;
+  error: any;
 };
 
 type BasicAnalyzeContextType = {
   data: any;
   isLoading: boolean;
-  error: string | null;
+  error: AxiosError;
+  fetchData: (code: number) => void;
 };
 
 const BasicAnalyzeContext = createContext<BasicAnalyzeContextType | null>(null);
 
 const BasicAnalyzeProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, setState] = useState<StateType>({
-    isLoading: true,
+    isLoading: false,
     data: undefined,
-    error: null,
+    error: undefined,
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setState((prev) => ({ ...prev, isLoading: true }));
+  const fetchData = async (code: number) => {
+    setState((prev) => ({ ...prev, isLoading: true }));
 
-      const { res, error } = await basicAnalyseAPI(87782);
+    const { res, error } = await basicAnalyseAPI(code);
 
-      if (res) {
-        console.log(res);
-        
-        setState({ isLoading: false, data: res.data, error: null });
-      } else if (error) {
-        setState({ isLoading: false, data: undefined, error: error.message });
-      }
+    if (res) {
+      console.log(res);
+      setState({ isLoading: false, data: res.data, error: null });
+    } else if (error) {
+      console.log(error);
+      setState({ isLoading: false, data: undefined, error });
+    }
 
-      setState((prev) => ({ ...prev, isLoading: false }));
-    };
-    fetchData();
-  }, []);
+    setState((prev) => ({ ...prev, isLoading: false }));
+  };
 
   return (
-    <BasicAnalyzeContext.Provider value={{ ...state }}>
+    <BasicAnalyzeContext.Provider value={{ ...state, fetchData }}>
       {children}
     </BasicAnalyzeContext.Provider>
   );

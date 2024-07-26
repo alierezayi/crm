@@ -25,7 +25,7 @@ export default function TableContainer({
   orders: PositionsAndOrdersType[];
 }) {
   return (
-    <Card className="lg:col-span-4 xl:col-span-2 2xl:col-span-3">
+    <Card className="lg:col-span-4 xl:col-span-2 2xl:col-span-4">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <TableIcon className="w-4" />
