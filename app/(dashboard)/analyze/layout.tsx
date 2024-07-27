@@ -11,7 +11,7 @@ export default function AnalyzeLayout({
   return (
     <AnalyzeProviders>
       <div className="flex flex-col md:flex-row md:justify-between gap-y-5 md:items-center md:mb-0 py-5">
-        <div className="flex flex-col md:flex-row gap-x-10 items-center">
+        <div className="flex flex-col md:flex-row gap-x-10 gap-y-5 md:items-center">
           <SearchBar />
           <UserInfo />
         </div>

@@ -19,6 +19,43 @@ export type HistoryChartType = {
   balance: number;
 };
 
+export type ChartDrawdownType = {
+  time: string;
+  balance: number;
+  minEquity: number;
+  maxEquity: number;
+  startBalance: number;
+  eodBalance: number;
+  matBalance: number;
+  mdBalance: number;
+};
+
+export type ShowChartDrawdownType = {
+  fixStartRole: number;
+  fixEODRole: number;
+  fixMATRole: number;
+  fixMDRole: number;
+  perStartRole: number;
+  perEODRole: number;
+  perMDRole: number;
+  perMATRole: number;
+};
+
+export type ChartDrawdownAnalyzeType = {
+  maxFloatingDrawdown: number;
+  maxFloatingDrawdownTime: string;
+  maxStartBalanceDrawdown: number;
+  maxStartBalanceDrawdownTime: string;
+  maxAllTimeBalanceDrawdown: number;
+  maxAllTimeBalanceDrawdownTime: string;
+  maxDayBalanceDrawdown: number;
+  maxDayBalanceDrawdownTime: string;
+  maxEODBalanceDrawdown: number;
+  maxEODBalanceDrawdownTime: string;
+  chartDrawdown: ChartDrawdownType[];
+  showChartDrawdown: ShowChartDrawdownType;
+};
+
 export type PositionsAndOrdersType = {
   ticket: number;
   symbol: string;

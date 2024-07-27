@@ -78,7 +78,7 @@ export default function NowStatus({
                 <span>Balance</span>
               </div>
               <span className="text-muted-foreground">
-                {profit?.toFixed(2)}
+                {balance?.toFixed(2)}
               </span>
             </div>
             <div className="flex items-center gap-5">
@@ -112,22 +112,6 @@ export default function NowStatus({
               <span className="text-muted-foreground">{relativeDrawdown}</span>
             </div>
           </div>
-          {/* <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-5">
-              <div className="flex gap-2">
-                <TrendingUp className="w-4 h-4" />
-                <span>Profit </span>
-              </div>
-              <span className="text-muted-foreground">{profit}</span>
-            </div>
-            <div className="flex items-center gap-5">
-              <div className="flex gap-2">
-                <MdShowChart className="w-4 h-4" />
-                <span>Relative Drawdown</span>
-              </div>
-              <span className="text-muted-foreground">{relativeDrawdown}</span>
-            </div>
-          </div> */}
         </div>
         <Separator />
         <div className="flex flex-col gap-1">
@@ -142,9 +126,7 @@ export default function NowStatus({
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <Card
-          // className="border-none bg-gray-100 dark:bg-gray-900"
-          >
+          <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 Free Margin
@@ -152,9 +134,7 @@ export default function NowStatus({
               <CardDescription>{freeMargin}</CardDescription>
             </CardHeader>
           </Card>
-          <Card
-          // className="border-none bg-gray-100 dark:bg-gray-900"
-          >
+          <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 truncate">
                 Margin Drawdown
@@ -162,14 +142,12 @@ export default function NowStatus({
               <CardDescription>{freeMarginDrawdown}</CardDescription>
             </CardHeader>
           </Card>
-          <Card
-          // className="border-none bg-gray-100 dark:bg-gray-900"
-          >
+          <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 Margin Level
               </CardTitle>
-              <CardDescription>{marginLevel}</CardDescription>
+              <CardDescription>{marginLevel.toFixed(4)}</CardDescription>
             </CardHeader>
           </Card>
         </div>

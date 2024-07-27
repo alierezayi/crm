@@ -30,10 +30,8 @@ const BasicAnalyzeProvider = ({ children }: { children: React.ReactNode }) => {
     const { res, error } = await basicAnalyseAPI(code);
 
     if (res) {
-      console.log(res);
       setState({ isLoading: false, data: res.data, error: null });
     } else if (error) {
-      console.log(error);
       setState({ isLoading: false, data: undefined, error });
     }
 

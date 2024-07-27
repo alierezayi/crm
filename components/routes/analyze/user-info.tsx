@@ -19,7 +19,7 @@ export default function UserInfo() {
       ) : (
         <>
           {error ? (
-            <div className="ml-5">Error fetching user data</div>
+            <div className="ml-5 truncate">Error fetching user data</div>
           ) : (
             <>
               {data ? (

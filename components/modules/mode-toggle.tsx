@@ -19,20 +19,26 @@ export function ModeToggle() {
 
   return (
     <div className="w-14 flex justify-end">
-      <Button variant="ghost" size="icon" className="bg-transparent">
-        {theme === "dark" ? (
-          <Sun
-            className="h-[1rem] w-[1rem]"
-            onClick={() => setTheme("light")}
-          />
-        ) : (
-          <Moon
-            className="h-[1.2rem] w-[1.2rem]"
-            onClick={() => setTheme("dark")}
-          />
-        )}
-        <span className="sr-only">Toggle theme</span>
-      </Button>
+      {theme === "dark" ? (
+        <Button
+          variant="ghost"
+          onClick={() => setTheme("light")}
+          size="icon"
+          className="bg-transparent"
+        >
+          <Sun className="h-4 w-4" />
+        </Button>
+      ) : (
+        <Button
+          variant="ghost"
+          onClick={() => setTheme("dark")}
+          size="icon"
+          className="bg-transparent"
+        >
+          <Moon className="h-4 w-4" />
+        </Button>
+      )}
+      <span className="sr-only">Toggle theme</span>
     </div>
   );
 }
