@@ -14,9 +14,10 @@ import Cookies from "js-cookie";
 import { toast } from "sonner";
 import ChartDrawdown from "@/components/routes/analyze/overview/chart-drawdown";
 
-export default function OverviewPage() {
+export default function OverviewContent() {
   const router = useRouter();
   const { data, isLoading, error } = useBasicAnalyze();
+  console.log(data);
 
   const summary = data?.summary;
   const nowStatus = data?.nowStatus;

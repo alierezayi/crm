@@ -53,17 +53,18 @@ export default function SignInForm() {
     const { res, error } = await loginAPI(credentials);
     if (error) {
       toast.error(error.message);
-      return;
     }
-    const data = res?.data;
-    if (data.twoFactor) {
-      router.push("two-factor");
-    } else {
-      Cookies.set("token", data.token, {
-        expires: 1,
-      });
-      router.push("/main");
-      refetch();
+    if (res) {
+      const data = res?.data;
+      if (data.twoFactor) {
+        router.push("two-factor");
+      } else {
+        Cookies.set("token", data.token, {
+          expires: 1,
+        });
+        router.push("/main");
+        refetch();
+      }
     }
     setIsLoading(false);
   };
@@ -114,15 +115,10 @@ export default function SignInForm() {
               </FormItem>
             )}
           />
-          <Button
-            type="submit"
-            disabled={isLoading}
-            
-            className="w-full"
-          >
+          <Button type="submit" disabled={isLoading} className="w-full">
             {isLoading ? "loading ..." : "Login"}
           </Button>
-          <Button variant="ghost"  className="w-full">
+          <Button variant="ghost" className="w-full">
             Create a new account
           </Button>
         </form>

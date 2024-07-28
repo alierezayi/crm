@@ -4,29 +4,45 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useBasicAnalyze } from "@/context/basic-analyze-context";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const links = [
-  { href: "/analyze/overview", label: "Overview" },
-  { href: "/analyze/history-positions", label: "History Positions" },
-  { href: "/analyze/user-ips", label: "User IPs" },
+  { tab: "overview", label: "Overview" },
+  { tab: "history-positions", label: "History Positions" },
+  { tab: "user-ips", label: "User IPs" },
 ];
 
-export default function MainTabs() {
+export default function AnalyzeTabs() {
   const { data } = useBasicAnalyze();
-  const pathname = usePathname();
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const tab = searchParams.get("tab");
+
+  useEffect(() => {
+    if (!tab) {
+      router.replace(`?tab=overview`);
+    }
+  }, [router, tab]);
 
   return (
     <Tabs>
       <TabsList className="w-fit">
         {links.map((link) => (
-          <Link href={data ? link.href : "#"} key={link.href}>
+          <Link
+            href={{
+              pathname: "/analyze",
+              query: { tab: link.tab },
+            }}
+            key={link.tab}
+          >
             <TabsTrigger
               className={cn(
-                link.href === pathname ? "bg-background text-foreground" : ""
+                link.tab === tab && "bg-background text-foreground"
               )}
-              value={link.href}
-              disabled={!data}
+              value={link.tab}
             >
               {link.label}
             </TabsTrigger>
