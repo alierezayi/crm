@@ -15,21 +15,21 @@ import {
   RadialBarChart,
 } from "recharts";
 
-const chartData = [
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-];
-
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
+  trade: {
+    label: "Trade",
   },
-  safari: {
-    label: "Safari",
+  day: {
+    label: "Day",
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
 
 export default function DayTrade({ value }: { value: number }) {
+  const chartData = [
+    { type: "day", trade: value, fill: value >= 6 ? "#16a34a" : "#2563eb" },
+  ];
+
   return (
     <Card className="w-full">
       <CardHeader className="pb-5">
@@ -38,7 +38,7 @@ export default function DayTrade({ value }: { value: number }) {
             <LucideCalendarDays className="w-4 h-4" />6 Day Trade
           </div>
           {value >= 6 ? (
-            <Badge variant="success">Pass</Badge>
+            <Badge variant="success">Passed</Badge>
           ) : (
             <Badge variant="info">Stable</Badge>
           )}
@@ -49,7 +49,7 @@ export default function DayTrade({ value }: { value: number }) {
           <RadialBarChart
             data={chartData}
             startAngle={0}
-            endAngle={250}
+            endAngle={value * 66.6}
             innerRadius={18}
             outerRadius={33}
           >
@@ -60,11 +60,11 @@ export default function DayTrade({ value }: { value: number }) {
               className="first:fill-muted last:fill-background"
               polarRadius={[21, 15]}
             />
-            <RadialBar dataKey="visitors" background cornerRadius={10} />
+            <RadialBar dataKey="trade" background cornerRadius={10} />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false} />
           </RadialBarChart>
         </ChartContainer>
-        <CardDescription>{value} Days</CardDescription>
+        <CardDescription>{value} Day</CardDescription>
       </CardContent>
     </Card>
   );

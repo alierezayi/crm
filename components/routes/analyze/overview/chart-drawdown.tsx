@@ -15,43 +15,19 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { chartDrawdownConfig } from "@/configs/chart";
-import { ChartDrawdownAnalyzeType } from "@/lib/types";
-import { chartDrawdownAnalyzeAPI } from "@/services/prop-account-analyze";
+import { useChartDrawdown } from "@/context/chart-drawdown-context";
 import { ChartArea } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 
 export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
-  const [data, setData] = useState<ChartDrawdownAnalyzeType | null>(null);
-  const [isloading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { data, error, isLoading, fetchData } = useChartDrawdown();
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-
-      const { res, error } = await chartDrawdownAnalyzeAPI(loginCode);
-      if (error) {
-        setError(error.message);
-      }
-      if (res) {
-        setData(res?.data);
-      }
-
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
-  // const newChartData = data?.chartDrawdown.map((item: any) => {
-  //   const date = item.time?.split("T")[0];
-  //   delete item.time;
-  //   return {
-  //     ...item,
-  //     date,
-  //   };
-  // });
+    if (!data) {
+      fetchData(loginCode);
+    }
+  }, [data]);
 
   return (
     <Card className="lg:col-span-4">
@@ -63,7 +39,7 @@ export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
         <CardDescription>Chart Drawdown</CardDescription>
       </CardHeader>
       <CardContent>
-        {isloading ? (
+        {isLoading ? (
           <div className="flex items-center justify-center w-full h-[310px]">
             <span>Loading...</span>
           </div>
@@ -71,7 +47,7 @@ export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
           <>
             {error && (
               <div className="flex items-center justify-center w-full h-[310px]">
-                <span>{error}</span>
+                <span>{error.message}</span>
               </div>
             )}
             {data && (
@@ -95,11 +71,8 @@ export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
                     tickMargin={8}
                     minTickGap={32}
                     tickFormatter={(value) => {
-                      console.log(value);
-
                       const newFormatDate = value.time?.split("T")[0];
                       const date = new Date(newFormatDate);
-
                       return date.toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",

@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -7,7 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
-import { MdDoneAll, MdOutlineAccessTime } from "react-icons/md";
+import { useChartDrawdown } from "@/context/chart-drawdown-context";
+import { CgPerformance } from "react-icons/cg";
 import {
   PolarGrid,
   PolarRadiusAxis,
@@ -25,9 +28,19 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function TradeLimitTime({ value }: { value: number }) {
+export default function StartBalanceMaxDrawdown() {
+  const { data } = useChartDrawdown();
+
+  const value = data?.maxStartBalanceDrawdown!;
+
+  const date = `${data?.maxStartBalanceDrawdownTime.split("T")[0]} ${
+    data?.maxStartBalanceDrawdownTime.split("T")[1]
+  }`;
+
+  console.log(date);
+
   const chartData = [
-    { type: "day", trade: value, fill: value >= 3 ? "#e11d48" : "#2563eb" },
+    { type: "day", trade: value, fill: value >= 1 ? "#e11d48" : "#2563eb" },
   ];
 
   return (
@@ -35,9 +48,10 @@ export default function TradeLimitTime({ value }: { value: number }) {
       <CardHeader className="pb-5">
         <CardTitle className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
-            <MdOutlineAccessTime className="w-4 h-4" />3 Min Trade
+            <CgPerformance className="w-4 h-4" />
+            Start balance max drawdown
           </div>
-          {value >= 3 ? (
+          {value >= 1 ? (
             <Badge variant="danger">Rejected</Badge>
           ) : (
             <Badge variant="info">Stable</Badge>
@@ -64,7 +78,10 @@ export default function TradeLimitTime({ value }: { value: number }) {
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false} />
           </RadialBarChart>
         </ChartContainer>
-        <CardDescription>{value} Trade</CardDescription>
+        <CardDescription className="flex flex-col gap-2">
+          <div>{value}% drawdown</div>
+          <div className="text-xs">{date}</div>
+        </CardDescription>
       </CardContent>
     </Card>
   );
