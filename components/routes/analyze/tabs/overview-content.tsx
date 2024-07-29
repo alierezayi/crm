@@ -51,12 +51,12 @@ export default function OverviewContent() {
           {data && (
             <div>
               <PropAnalyze {...propAnalyze} />
-              <div className="grid grid-cols-1 lg:grid-cols-4 mt-5 gap-5">
+              <div className="grid grid-cols-1 lg:grid-cols-4 mt-5 gap-y-5 gap-x-2">
+                <Summary {...summary} />
                 <ChartContainer
                   historyBalance={historyBalance}
                   historyGrowth={historyGrowth}
                 />
-                <Summary {...summary} />
                 <TradeStatus {...tradeStatus} />
                 <NowStatus {...nowStatus} />
                 <TableContainer orders={orders} positions={positions} />
