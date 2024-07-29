@@ -1,6 +1,6 @@
 "use client";
 
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   ChartContainer,
   ChartTooltip,
@@ -39,6 +39,7 @@ export function BalanceChart({ chartData }: { chartData: HistoryChartType[] }) {
           axisLine={false}
           tickMargin={8}
           minTickGap={32}
+          hide
           tickFormatter={(value) => {
             const date = new Date(value);
             return date.toLocaleDateString("en-US", {
@@ -47,6 +48,7 @@ export function BalanceChart({ chartData }: { chartData: HistoryChartType[] }) {
             });
           }}
         />
+        <YAxis dataKey="balance" hide />
         <ChartTooltip
           content={
             <ChartTooltipContent

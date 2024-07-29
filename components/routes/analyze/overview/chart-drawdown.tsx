@@ -29,6 +29,12 @@ export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (loginCode) {
+      fetchData(loginCode);
+    }
+  }, [loginCode]);
+
   return (
     <Card className="lg:col-span-4">
       <CardHeader>

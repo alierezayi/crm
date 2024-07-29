@@ -42,7 +42,9 @@ export default function PositionsTableRows({
             <TableCell>{ticket}</TableCell>
             <TableCell>{symbol}</TableCell>
             <TableCell className="truncate">
-              {openTime.split("T")[0]} {openTime.split("T")[1].split(".")[0]}
+              <div>
+                {openTime.split("T")[0]} {openTime.split("T")[1].split(".")[0]}
+              </div>
             </TableCell>
             <TableCell>{typeString}</TableCell>
             <TableCell>{volume}</TableCell>

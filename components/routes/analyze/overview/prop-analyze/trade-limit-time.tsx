@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
-import { MdDoneAll, MdOutlineAccessTime } from "react-icons/md";
+import { MdOutlineAccessTime } from "react-icons/md";
 import {
   PolarGrid,
   PolarRadiusAxis,
@@ -27,7 +27,7 @@ const chartConfig = {
 
 export default function TradeLimitTime({ value }: { value: number }) {
   const chartData = [
-    { type: "day", trade: value, fill: value >= 3 ? "#e11d48" : "#2563eb" },
+    { type: "day", trade: value, fill: value >= 3 ? "#e11d48" : "#16a34a" },
   ];
 
   return (
@@ -40,7 +40,7 @@ export default function TradeLimitTime({ value }: { value: number }) {
           {value >= 3 ? (
             <Badge variant="danger">Rejected</Badge>
           ) : (
-            <Badge variant="info">Stable</Badge>
+            <Badge variant="success">Passed</Badge>
           )}
         </CardTitle>
       </CardHeader>
