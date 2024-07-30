@@ -27,6 +27,7 @@ export default function OverviewContent() {
   const historyBalance = data?.historyBalance;
   const historyGrowth = data?.historyGrowth;
   const loginCode = data?.user.login;
+  console.log(nowStatus);
 
   useEffect(() => {
     if (error?.response?.status === 401) {
@@ -69,3 +70,5 @@ export default function OverviewContent() {
     </>
   );
 }
+
+

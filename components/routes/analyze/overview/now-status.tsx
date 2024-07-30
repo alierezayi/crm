@@ -5,24 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { NowStatusType } from "@/lib/types";
-import { TbMoneybag } from "react-icons/tb";
-import {
-  CandlestickChart,
-  FilePieChart,
-  TrendingDown,
-  TrendingUp,
-  ChartNoAxesCombined,
-  Scale,
-  ArrowBigDownDash,
-  ArrowBigUpDash,
-} from "lucide-react";
-import Image from "next/image";
-import chartUp from "@/assets/images/chart-up.svg";
-import chartDown from "@/assets/images/chart-down.svg";
-import { Separator } from "@/components/ui/separator";
-import { MdShowChart } from "react-icons/md";
+import { ChartNoAxesCombined } from "lucide-react";
 
 export default function NowStatus({
   equity,
@@ -48,7 +32,76 @@ export default function NowStatus({
         <CardDescription>Now Status</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 w-full">
-        <div className="flex items-center justify-between w-full font-medium">
+        <div className="max-w-4xl mx-auto bg-white rounded-lg p-6">
+          <h1 className="text-2xl font-bold mb-6 text-center">
+            Trading Data Dashboard
+          </h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="p-4 bg-blue-50 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Balance</h2>
+              <p className="text-xl font-bold text-blue-800">${balance}</p>
+            </div>
+            <div className="p-4 bg-green-50 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Equity</h2>
+              <p className="text-xl font-bold text-green-800">${equity}</p>
+            </div>
+            <div className="p-4 bg-yellow-50 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Free Margin</h2>
+              <p className="text-xl font-bold text-yellow-800">${freeMargin}</p>
+            </div>
+            <div className="p-4 bg-red-50 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Free Margin Drawdown</h2>
+              <p className="text-xl font-bold text-red-800">
+                {freeMarginDrawdown}%
+              </p>
+            </div>
+            <div className="p-4 bg-purple-50 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Margin</h2>
+              <p className="text-xl font-bold text-purple-800">${margin}</p>
+            </div>
+            <div className="p-4 bg-indigo-50 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Margin Level</h2>
+              <p className="text-xl font-bold text-indigo-800">
+                {marginLevel}%
+              </p>
+            </div>
+            <div className="p-4 bg-pink-50 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Margin Percent</h2>
+              <p className="text-xl font-bold text-pink-800">
+                {marginPercent}%
+              </p>
+            </div>
+            <div className="p-4 bg-teal-50 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Max Balance Equity</h2>
+              <p className="text-xl font-bold text-teal-800">
+                ${maxBalanceEquity}
+              </p>
+            </div>
+            <div className="p-4 bg-gray-50 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Min Balance Equity</h2>
+              <p className="text-xl font-bold text-gray-800">
+                ${minBalanceEquity}
+              </p>
+            </div>
+            <div className="p-4 bg-orange-50 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Profit</h2>
+              <p className="text-xl font-bold text-orange-800">${profit}</p>
+            </div>
+            <div className="p-4 bg-cyan-50 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Relative Drawdown</h2>
+              <p className="text-xl font-bold text-cyan-800">
+                {relativeDrawdown}%
+              </p>
+            </div>
+            <div className="p-4 bg-lime-50 rounded-lg shadow">
+              <h2 className="text-lg font-semibold">Start Balance Drawdown</h2>
+              <p className="text-xl font-bold text-lime-800">
+                ${startBalanceDrawdown}
+              </p>
+            </div>
+          </div>
+        </div>
+        {/* <div className="flex items-center justify-between w-full font-medium">
           <h2 className="text-lg -mb-1.5">Equity</h2>
           {equity >= 0 ? (
             <div className="text-emerald-600 dark:text-emerald-400 flex gap-5 items-end">
@@ -150,7 +203,7 @@ export default function NowStatus({
               <CardDescription>{marginLevel.toFixed(4)}</CardDescription>
             </CardHeader>
           </Card>
-        </div>
+        </div> */}
       </CardContent>
     </Card>
   );

@@ -58,7 +58,7 @@ export default function MaxStartBalance() {
               value={value * perStartRole}
             />
             <CardDescription className="flex justify-between gap-2 w-full mt-5">
-              <div>{value}% drawdown</div>
+              <div>{value.toFixed(2)}% drawdown</div>
               <div className="">{date}</div>
             </CardDescription>
           </>
