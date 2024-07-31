@@ -1,24 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useBasicAnalyze } from "@/context/basic-analyze-context";
+import { useSearchParams } from "next/navigation";
+import { useHistoryPositions } from "@/context/history-positions-context";
 
-export default function SearchBar() {
-  const [value, setValue] = useState<number | null>(null);
+export default function SearchBar({
+  value,
+  onChange,
+}: {
+  value: number | null;
+  onChange: Dispatch<SetStateAction<number | null>>;
+}) {
+  const searchParams = useSearchParams();
+  const tab = searchParams.get("tab");
 
-  const { fetchData, isLoading, data } = useBasicAnalyze();
+  const {
+    fetchData: fetchBasicAnalyze,
+    isLoading: isBasicAnalyzeLoading,
+    data: basicAnalyzeData,
+  } = useBasicAnalyze();
+
+  const {
+    fetchData: fetchHistoryPositions,
+    isLoading: isHistoryPositionsLoading,
+    data: HistoryPositionsData,
+  } = useHistoryPositions();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (!!value && value !== data?.user.login) {
-      fetchData(value);
+    if (!!value) {
+      tab === "overview" && fetchBasicAnalyze(value);
+      tab === "history-positions" && fetchHistoryPositions(value);
     }
   };
 
-  const handleInputChange = (e: any) => setValue(+e.target.value);
+  const handleInputChange = (e: any) => onChange(+e.target.value);
 
   return (
     <form
@@ -33,7 +53,11 @@ export default function SearchBar() {
         minLength={4}
         className="flex-1"
       />
-      <Button disabled={isLoading} size="icon" type="submit">
+      <Button
+        disabled={isBasicAnalyzeLoading || isHistoryPositionsLoading}
+        size="icon"
+        type="submit"
+      >
         <Search className="w-5 h-5" />
       </Button>
     </form>

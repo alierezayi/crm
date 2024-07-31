@@ -15,7 +15,6 @@ import { ChartColumnIncreasing } from "lucide-react";
 
 export default function MaxStartBalance() {
   const { data, isLoading } = useChartDrawdown();
-  console.log(data);
 
   const value = data?.maxStartBalanceDrawdown! * 100;
 

@@ -1,6 +1,5 @@
 "use client";
 
-import NowStatus from "@/components/routes/analyze/overview/now-status";
 import PropAnalyze from "@/components/routes/analyze/overview/prop-analyze";
 import Summary from "@/components/routes/analyze/overview/summary";
 import TradeStatus from "@/components/routes/analyze/overview/trade-status";
@@ -13,6 +12,7 @@ import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
 import ChartDrawdown from "@/components/routes/analyze/overview/chart-drawdown";
+import NowStatus from "@/components/routes/analyze/overview/now-status";
 
 export default function OverviewContent() {
   const router = useRouter();
@@ -27,7 +27,6 @@ export default function OverviewContent() {
   const historyBalance = data?.historyBalance;
   const historyGrowth = data?.historyGrowth;
   const loginCode = data?.user.login;
-  console.log(nowStatus);
 
   useEffect(() => {
     if (error?.response?.status === 401) {
@@ -70,5 +69,3 @@ export default function OverviewContent() {
     </>
   );
 }
-
-

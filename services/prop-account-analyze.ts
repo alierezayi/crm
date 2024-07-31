@@ -36,3 +36,21 @@ export const chartDrawdownAnalyzeAPI = async (
     }
   }
 };
+
+export const historyPositionsAPI = async (
+  code: number
+): Promise<ResponseType> => {
+  try {
+    const response = await api.post(
+      "PropAccountAnalyze/HistoryPositions",
+      code
+    );
+    return { res: response };
+  } catch (error) {
+    if (isAxiosError(error)) {
+      return { error };
+    } else {
+      throw error;
+    }
+  }
+};

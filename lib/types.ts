@@ -122,3 +122,22 @@ export type TradeStatusType = {
   countAlgoTradingPercentage: number;
   countDayTrade: number;
 };
+
+export type HistoryPosition = {
+  ticket: number;
+  symbol: string;
+  openTime: string;
+  type: string;
+  volume: number;
+  nowPrice: number;
+  closeTime: string;
+  closePrice: number;
+  commission: number;
+  swap: number;
+  profit: number;
+  reason: string;
+  stopLoss?: number;
+  takeProfit?: number;
+  positionDuration?: string;
+  openPrice?: number;
+};
