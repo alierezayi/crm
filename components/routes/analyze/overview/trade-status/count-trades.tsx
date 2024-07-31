@@ -13,17 +13,17 @@ export default function CountTrades({
   countLossTradesPercentage: number;
 }) {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 text-xs">
       <div className="flex w-full items-center justify-between font-medium">
         <div className="flex items-center text-primary">
-          <TrendingUp className="w-4 h-4 mr-1" />
           Profit
           <span className="ml-2">{countProfitTrades}</span>
+          <TrendingUp className="w-3.5 h-3.5 ml-1" />
         </div>
         <div className="flex items-center text-primary">
-          <TrendingDown className="w-4 h-4 mr-1" />
           Loss
           <span className="ml-2">{countLossTrades}</span>
+          <TrendingDown className="w-3.5 h-3.5 ml-1" />
         </div>
       </div>
       <CountTradingProgress profit={countProfitTradesPercentage} />

@@ -60,13 +60,13 @@ export default function TradeStatus({
         <PlatformStatusChart {...dataChart} />
         <CountTrades {...dataCountTrades} />
         <Separator />
-        <div className="flex justify-between items-center mt-auto">
+        <div className="flex justify-between items-center mt-auto text-xs">
           <div className="flex items-center">
-            <ScrollText className="w-4 h-4 mr-3" />
+            <ScrollText className="w-3.5 h-3.5 mr-3" />
             <p>Profit Factor {profitFactor}</p>
           </div>
           <div className="flex items-center">
-            <Calendar className="w-4 h-4 mr-3" />
+            <Calendar className="w-3.5 h-3.5 mr-3" />
             <p>{countDayTrade} Day Trade</p>
           </div>
         </div>
