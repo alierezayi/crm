@@ -35,7 +35,7 @@ export default function DayTrade({ value }: { value: number }) {
       <CardHeader className="pb-5">
         <CardTitle className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
-            <LucideCalendarDays className="w-4 h-4" />6 Day Trade
+            <LucideCalendarDays className="w-3.5 h-3.5" />6 Day Trade
           </div>
           {value >= 6 ? (
             <Badge variant="success">Passed</Badge>

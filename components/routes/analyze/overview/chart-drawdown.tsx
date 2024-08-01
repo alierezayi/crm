@@ -15,25 +15,26 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { chartDrawdownConfig } from "@/configs/chart";
+import { useBasicAnalyze } from "@/context/basic-analyze-context";
 import { useChartDrawdown } from "@/context/chart-drawdown-context";
 import { ChartArea } from "lucide-react";
 import { useEffect } from "react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 
 export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
-  const { data, error, isLoading, fetchData } = useChartDrawdown();
+  const {
+    data: chartDrawdownData,
+    error,
+    isLoading,
+    fetchData,
+  } = useChartDrawdown();
+  const { data: basicAnalyzeData } = useBasicAnalyze();
 
   useEffect(() => {
-    if (!data) {
+    if (!chartDrawdownData) {
       fetchData(loginCode);
     }
-  }, [data]);
-
-  useEffect(() => {
-    if (loginCode) {
-      fetchData(loginCode);
-    }
-  }, [loginCode]);
+  }, [chartDrawdownData, basicAnalyzeData]);
 
   return (
     <Card className="lg:col-span-4">
@@ -56,14 +57,14 @@ export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
                 <span>{error.message}</span>
               </div>
             )}
-            {data && (
+            {chartDrawdownData && (
               <ChartContainer
                 className="aspect-auto h-[310px] w-full"
                 config={chartDrawdownConfig}
               >
                 <LineChart
                   accessibilityLayer
-                  data={data.chartDrawdown}
+                  data={chartDrawdownData.chartDrawdown}
                   margin={{
                     left: 12,
                     right: 12,

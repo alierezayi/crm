@@ -1,52 +1,25 @@
 "use client";
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useBasicAnalyze } from "@/context/basic-analyze-context";
+import { ActiveTabType, useAnalyzeTab } from "@/context/analyze-tab-context";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
-const links = [
-  { tab: "overview", label: "Overview" },
-  { tab: "history-positions", label: "History Positions" },
-  { tab: "user-ips", label: "User IPs" },
-];
+const tabs = ["Overview", "History Positions", "User IPs"];
 
 export default function AnalyzeTabs() {
-  const { data } = useBasicAnalyze();
-
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const tab = searchParams.get("tab");
-
-  useEffect(() => {
-    if (!tab) {
-      router.replace(`?tab=overview`);
-    }
-  }, [router, tab]);
-
+  const { activeTab, setActiveTab } = useAnalyzeTab();
   return (
     <Tabs>
       <TabsList className="w-fit">
-        {links.map((link) => (
-          <Link
-            href={{
-              pathname: "/analyze",
-              query: { tab: link.tab },
-            }}
-            key={link.tab}
+        {tabs.map((tab) => (
+          <TabsTrigger
+            key={tab}
+            className={cn(tab === activeTab && "bg-background text-foreground")}
+            value={tab}
+            onClick={() => setActiveTab(tab as ActiveTabType)}
           >
-            <TabsTrigger
-              className={cn(
-                link.tab === tab && "bg-background text-foreground"
-              )}
-              value={link.tab}
-            >
-              {link.label}
-            </TabsTrigger>
-          </Link>
+            {tab}
+          </TabsTrigger>
         ))}
       </TabsList>
     </Tabs>

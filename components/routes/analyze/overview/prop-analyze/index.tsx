@@ -5,6 +5,7 @@ import TradeLimitTime from "./trade-limit-time";
 import LimitVolume from "./limit-volume";
 import MaxStartBalance from "./max-start-balance";
 import MaxEODBalance from "./max-eod-balance";
+import MaxMDBalance from "./max-md-balance";
 
 export default function PropAnalyze({
   dayTrade,
@@ -13,17 +14,20 @@ export default function PropAnalyze({
   tradeLimitTime,
 }: PropAnalyzeType) {
   return (
-    <div>
+    <>
       <div className="w-full grid sm:grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-4">
-        <DayTrade value={dayTrade} />
-        <DayComplete value={dayTradeCompleteVolume} />
-        <TradeLimitTime value={tradeLimitTime} />
-        <LimitVolume value={limitVolume} />
+        {dayTrade && <DayTrade value={dayTrade} />}
+        {dayTradeCompleteVolume && (
+          <DayComplete value={dayTradeCompleteVolume} />
+        )}
+        {tradeLimitTime && <TradeLimitTime value={tradeLimitTime} />}
+        {limitVolume && <LimitVolume value={limitVolume} />}
       </div>
-      <div className="w-full grid sm:grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-3 mt-2">
+      <div className="w-full grid sm:grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-3 mt-5">
         <MaxStartBalance />
         <MaxEODBalance />
+        <MaxMDBalance />
       </div>
-    </div>
+    </>
   );
 }

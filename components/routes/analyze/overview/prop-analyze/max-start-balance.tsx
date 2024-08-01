@@ -14,7 +14,8 @@ import { cn } from "@/lib/utils";
 import { ChartColumnIncreasing } from "lucide-react";
 
 export default function MaxStartBalance() {
-  const { data, isLoading } = useChartDrawdown();
+  const { data, isLoading, error } = useChartDrawdown();
+  console.log(data);
 
   const value = data?.maxStartBalanceDrawdown! * 100;
 
@@ -25,14 +26,14 @@ export default function MaxStartBalance() {
   const perStartRole = data?.showChartDrawdown.perStartRole!;
 
   return (
-    <Card className="w-full">
+    <Card className="w-full h-[137.5px]">
       <CardHeader className="pb-5">
         <CardTitle className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
             <ChartColumnIncreasing className="w-4 h-4" />
             Start balance max drawdown
           </div>
-          {!isLoading && (
+          {data && (
             <>
               {value >= perStartRole ? (
                 <Badge variant="danger">Rejected</Badge>
@@ -43,23 +44,30 @@ export default function MaxStartBalance() {
           )}
         </CardTitle>
       </CardHeader>
-      <CardContent className="">
+      <CardContent className="h-full">
         {isLoading ? (
-          <div className="w-full h-full flex justify-center items-center">
-            Loading ...
-          </div>
+          <div className="flex justify-center items-center">Loading ...</div>
         ) : (
           <>
-            <Progress
-              className={cn(
-                value! >= perStartRole! ? "bg-rose-600" : "bg-blue-600"
-              )}
-              value={value * perStartRole}
-            />
-            <CardDescription className="flex justify-between gap-2 w-full mt-5">
-              <div>{value.toFixed(2)}% drawdown</div>
-              <div className="">{date}</div>
-            </CardDescription>
+            {error && (
+              <div className="w-full h-full flex justify-center items-center">
+                No result.
+              </div>
+            )}
+            {data && (
+              <>
+                <Progress
+                  className={cn(
+                    value! >= perStartRole! ? "bg-rose-600" : "bg-blue-600"
+                  )}
+                  value={value * perStartRole}
+                />
+                <CardDescription className="flex justify-between gap-2 w-full mt-5 text-xs">
+                  <div>{value}% drawdown</div>
+                  <div>{date}</div>
+                </CardDescription>
+              </>
+            )}
           </>
         )}
       </CardContent>

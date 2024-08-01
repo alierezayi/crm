@@ -11,24 +11,21 @@ import { DataTable } from "../history-positions/data-table";
 import { columns } from "../history-positions/columns";
 import { HistoryPosition } from "@/lib/types";
 
-export default function HistoryPositionsContent({}: {
-  loginCode: number | null;
-}) {
+export default function HistoryPositionsContent() {
   const router = useRouter();
   const { data: basicAnalyzeData } = useBasicAnalyze();
 
   const {
     data: historyPositionsData,
-    fetchData: fetchHistoryPositions,
+    fetchData,
     isLoading,
     error,
   } = useHistoryPositions();
+  const loginCode = basicAnalyzeData?.user.login;
 
   useEffect(() => {
-    if (!historyPositionsData && basicAnalyzeData?.user.login) {
-      fetchHistoryPositions(basicAnalyzeData?.user.login);
-    }
-  }, [basicAnalyzeData, historyPositionsData]);
+    fetchData(loginCode);
+  }, []);
 
   useEffect(() => {
     if (error?.response?.status === 401) {

@@ -5,40 +5,22 @@ import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useBasicAnalyze } from "@/context/basic-analyze-context";
-import { useSearchParams } from "next/navigation";
-import { useHistoryPositions } from "@/context/history-positions-context";
+import { useAnalyzeTab } from "@/context/analyze-tab-context";
 
-export default function SearchBar({
-  value,
-  onChange,
-}: {
-  value: number | null;
-  onChange: Dispatch<SetStateAction<number | null>>;
-}) {
-  const searchParams = useSearchParams();
-  const tab = searchParams.get("tab");
+export default function SearchBar() {
+  const [loginCode, setLoginCode] = useState<number | null>(null);
 
-  const {
-    fetchData: fetchBasicAnalyze,
-    isLoading: isBasicAnalyzeLoading,
-    data: basicAnalyzeData,
-  } = useBasicAnalyze();
-
-  const {
-    fetchData: fetchHistoryPositions,
-    isLoading: isHistoryPositionsLoading,
-    data: HistoryPositionsData,
-  } = useHistoryPositions();
+  const { fetchData, isLoading } = useBasicAnalyze();
+  const { setActiveTab } = useAnalyzeTab();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (!!value) {
-      tab === "overview" && fetchBasicAnalyze(value);
-      tab === "history-positions" && fetchHistoryPositions(value);
+
+    if (!!loginCode) {
+      setActiveTab("Overview");
+      fetchData(loginCode);
     }
   };
-
-  const handleInputChange = (e: any) => onChange(+e.target.value);
 
   return (
     <form
@@ -47,17 +29,13 @@ export default function SearchBar({
     >
       <Input
         type="number"
-        onChange={handleInputChange}
+        onChange={(e) => setLoginCode(+e.target.value)}
         placeholder="Enter user code"
         maxLength={8}
         minLength={4}
         className="flex-1"
       />
-      <Button
-        disabled={isBasicAnalyzeLoading || isHistoryPositionsLoading}
-        size="icon"
-        type="submit"
-      >
+      <Button disabled={isLoading} size="icon" type="submit">
         <Search className="w-5 h-5" />
       </Button>
     </form>
