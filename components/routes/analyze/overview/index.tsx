@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
-import ChartDrawdown from "@/components/routes/analyze/overview/chart-drawdown";
+import ChartDrawdown from "@/components/templates/charts/chart-drawdown";
 import NowStatus from "@/components/routes/analyze/overview/now-status";
 
 export default function OverviewContent() {
@@ -50,7 +50,7 @@ export default function OverviewContent() {
           )}
           {error?.response?.status === 400 && <div>User not founded.</div>}
           {data && (
-            <div>
+            <div className="mt-8">
               <PropAnalyze {...propAnalyze} />
               <div className="grid grid-cols-1 lg:grid-cols-4 mt-5 gap-y-5 gap-x-2">
                 <Summary {...summary} />

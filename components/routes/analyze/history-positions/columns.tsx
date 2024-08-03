@@ -28,6 +28,10 @@ export const columns: ColumnDef<HistoryPosition>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const date = new Date(row.getValue("openTime"));
+      return <div className="">{date.toLocaleString()}</div>;
+    },
   },
   {
     accessorKey: "type",
@@ -53,6 +57,19 @@ export const columns: ColumnDef<HistoryPosition>[] = [
   {
     accessorKey: "closeTime",
     header: "Time Close",
+    cell: ({ row }) => {
+      const date = new Date(row.getValue("closeTime"));
+      return <div className="">{date.toLocaleString()}</div>;
+    },
+  },
+  {
+    accessorKey: "positionDuration",
+    header: "Duration",
+    // cell: ({ row }) => {
+    //   const duration = row.getValue("positionDuration")
+
+    //   return <div>{duration??}</div>;
+    // },
   },
   {
     accessorKey: "commission",

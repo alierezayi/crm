@@ -3,14 +3,14 @@ import { ChartConfig } from "@/components/ui/chart";
 export const balanceChartConfig = {
   balance: {
     label: "Balance",
-    color: "hsl(var(--chart-2))",
+    color: "hsl(var(--chart-area-balance))",
   },
 } satisfies ChartConfig;
 
 export const growthChartConfig = {
   growth: {
     label: "Growth",
-    color: "hsl(var(--chart-5))",
+    color: "hsl(var(--chart-area-growth))",
   },
 } satisfies ChartConfig;
 

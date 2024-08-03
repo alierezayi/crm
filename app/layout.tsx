@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(poppins.className, "text-sm scrollbar")}>
+      <body className={cn(poppins.className, "text-sm")}>
         <Providers>{children}</Providers>
       </body>
     </html>

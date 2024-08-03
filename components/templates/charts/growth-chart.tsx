@@ -1,6 +1,6 @@
 "use client";
 
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   ChartContainer,
   ChartTooltip,
@@ -19,6 +19,10 @@ export function GrowthChart({ chartData }: { chartData: HistoryChartType[] }) {
     };
   });
 
+  const growth = newChartData.map((item) => item.growth);
+  const minGrowth = Math.min(...growth);
+  const maxGrowth = Math.max(...growth);
+
   return (
     <ChartContainer
       config={growthChartConfig}
@@ -27,10 +31,7 @@ export function GrowthChart({ chartData }: { chartData: HistoryChartType[] }) {
       <AreaChart
         accessibilityLayer
         data={newChartData}
-        margin={{
-          left: 12,
-          right: 12,
-        }}
+        
       >
         <CartesianGrid vertical={false} />
         <XAxis
@@ -47,6 +48,19 @@ export function GrowthChart({ chartData }: { chartData: HistoryChartType[] }) {
               day: "numeric",
             });
           }}
+        />
+        <YAxis
+          dataKey="growth"
+          domain={[minGrowth, maxGrowth]}
+          type="number"
+          tickLine={false}
+          axisLine={false}
+          tickMargin={8}
+          minTickGap={32}
+          allowDataOverflow={true} 
+          tickFormatter={(value) => `$${value.toLocaleString()}`}
+          tickCount={20}
+          tickSize={5}
         />
         <ChartTooltip
           content={

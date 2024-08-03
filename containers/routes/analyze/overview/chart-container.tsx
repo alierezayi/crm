@@ -1,7 +1,7 @@
 "use client";
 
-import { BalanceChart } from "@/components/routes/analyze/overview/balance-chart";
-import { GrowthChart } from "@/components/routes/analyze/overview/growth-chart";
+import { BalanceChart } from "@/components/templates/charts/balance-chart";
+import { GrowthChart } from "@/components/templates/charts/growth-chart";
 import {
   Card,
   CardContent,

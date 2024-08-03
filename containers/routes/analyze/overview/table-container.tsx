@@ -1,5 +1,5 @@
-import OrdersTableRows from "@/components/routes/analyze/overview/orders-table-rows";
-import PositionsTableRows from "@/components/routes/analyze/overview/positions-table-rows";
+import OrdersTableRows from "@/components/templates/tables/orders-table-rows";
+import PositionsTableRows from "@/components/templates/tables/positions-table-rows";
 import {
   Card,
   CardContent,
@@ -52,7 +52,14 @@ export default function TableContainer({
               <TableHead>Reason</TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody className="min-h-[300px]">
+            {positions.length === 0 && orders.length === 0 ? (
+              <TableRow>
+                <td colSpan={12} className="text-center py-4">
+                  No data available
+                </td>
+              </TableRow>
+            ) : null}
             <PositionsTableRows positions={positions} />
             <OrdersTableRows orders={orders} />
           </TableBody>

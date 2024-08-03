@@ -7,25 +7,14 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { DataTable } from "../history-positions/data-table";
-import { columns } from "../history-positions/columns";
 import { HistoryPosition } from "@/lib/types";
+import { DataTable } from "@/components/routes/analyze/history-positions/data-table";
+import { columns } from "@/components/routes/analyze/history-positions/columns";
 
 export default function HistoryPositionsContent() {
   const router = useRouter();
-  const { data: basicAnalyzeData } = useBasicAnalyze();
 
-  const {
-    data: historyPositionsData,
-    fetchData,
-    isLoading,
-    error,
-  } = useHistoryPositions();
-  const loginCode = basicAnalyzeData?.user.login;
-
-  useEffect(() => {
-    fetchData(loginCode);
-  }, []);
+  const { data, isLoading, error } = useHistoryPositions();
 
   useEffect(() => {
     if (error?.response?.status === 401) {
@@ -37,8 +26,8 @@ export default function HistoryPositionsContent() {
     }
   }, [error]);
 
-  // console.log(historyPositionsData);
-  const newData = historyPositionsData?.map((item: HistoryPosition) => {
+  // console.log(data);
+  const newData = data?.map((item: HistoryPosition) => {
     const dateOpenTime = item.openTime.split("T")[0];
     const timeOpenTime = item.openTime.split("T")[1].split(".")[0];
     const dateCloseTime = item.closeTime.split("T")[0];
@@ -46,9 +35,11 @@ export default function HistoryPositionsContent() {
 
     const newOpenTime = `${dateOpenTime} ${timeOpenTime}`;
     const newCloseTime = `${dateCloseTime} ${timeCloseTime}`;
+    const newDuration = item.positionDuration.split(".")[0];
 
     return {
       ...item,
+      positionDuration: newDuration,
       openTime: newOpenTime,
       closeTime: newCloseTime,
     };

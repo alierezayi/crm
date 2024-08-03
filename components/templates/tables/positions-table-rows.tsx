@@ -70,7 +70,7 @@ export default function PositionsTableRows({
           </TableRow>
         )
       )}
-      {positions.length && (
+      {!!positions.length && (
         <TableRow className="bg-muted/50 font-medium">
           <TableCell>Positions</TableCell>
           <TableCell></TableCell>

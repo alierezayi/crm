@@ -14,6 +14,7 @@ export default function OrdersTableRows({
   const totalProfit = orders.reduce((acc, curr) => acc + curr.profit, 0);
 
   const totalReason = orders.reduce((acc, curr) => acc + curr.reason, 0);
+
   return (
     <>
       {orders.map(
@@ -66,7 +67,7 @@ export default function OrdersTableRows({
           </TableRow>
         )
       )}
-      {orders.length && (
+      {!!orders.length && (
         <TableRow className="bg-muted/50 font-medium">
           <TableCell>Orders</TableCell>
           <TableCell></TableCell>

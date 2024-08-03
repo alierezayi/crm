@@ -19,6 +19,13 @@ export function BalanceChart({ chartData }: { chartData: HistoryChartType[] }) {
     };
   });
 
+  const balances = newChartData.map((item) => item.balance);
+  const minBalance = Math.min(...balances);
+  const maxBalance = Math.max(...balances);
+
+  console.log("Minimum Balance:", minBalance);
+  console.log("Maximum Balance:", maxBalance);
+
   return (
     <ChartContainer
       config={balanceChartConfig}
@@ -48,7 +55,19 @@ export function BalanceChart({ chartData }: { chartData: HistoryChartType[] }) {
             });
           }}
         />
-        <YAxis dataKey="balance" hide />
+        <YAxis
+          dataKey="balance"
+          domain={[minBalance, maxBalance]}
+          type="number"
+          tickLine={false}
+          axisLine={false}
+          tickMargin={8}
+          minTickGap={32}
+          allowDataOverflow={true}
+          tickFormatter={(value) => `${value.toLocaleString()}`}
+          tickCount={20}
+          tickSize={5}
+        />
         <ChartTooltip
           content={
             <ChartTooltipContent

@@ -136,8 +136,8 @@ export type HistoryPosition = {
   swap: number;
   profit: number;
   reason: string;
+  positionDuration: string;
   stopLoss?: number;
   takeProfit?: number;
-  positionDuration?: string;
   openPrice?: number;
 };

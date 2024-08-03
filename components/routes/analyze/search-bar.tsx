@@ -1,24 +1,40 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useBasicAnalyze } from "@/context/basic-analyze-context";
 import { useAnalyzeTab } from "@/context/analyze-tab-context";
+import { useHistoryPositions } from "@/context/history-positions-context";
+import { useChartDrawdown } from "@/context/chart-drawdown-context";
 
 export default function SearchBar() {
   const [loginCode, setLoginCode] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { fetchData, isLoading } = useBasicAnalyze();
+  const { fetchData: fetchBasicAnalyze, data: basicAnalyzeData } =
+    useBasicAnalyze();
+
+  const { fetchData: fetchHistoryPositions, data: HistoryPositionsData } =
+    useHistoryPositions();
+
+  const { fetchData: fetchChartDrawdown } = useChartDrawdown();
+
   const { setActiveTab } = useAnalyzeTab();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    if (!!loginCode) {
+    if (!!loginCode && loginCode !== basicAnalyzeData?.user.login) {
+      setIsLoading(true);
       setActiveTab("Overview");
-      fetchData(loginCode);
+      fetchBasicAnalyze(loginCode);
+      fetchChartDrawdown(loginCode);
+      setTimeout(() => {
+        fetchHistoryPositions(loginCode);
+      }, 3000);
+      setIsLoading(false);
     }
   };
 

@@ -15,26 +15,14 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { chartDrawdownConfig } from "@/configs/chart";
-import { useBasicAnalyze } from "@/context/basic-analyze-context";
 import { useChartDrawdown } from "@/context/chart-drawdown-context";
 import { ChartArea } from "lucide-react";
-import { useEffect } from "react";
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
 export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
-  const {
-    data: chartDrawdownData,
-    error,
-    isLoading,
-    fetchData,
-  } = useChartDrawdown();
-  const { data: basicAnalyzeData } = useBasicAnalyze();
+  const { data: chartDrawdownData, error, isLoading } = useChartDrawdown();
 
-  useEffect(() => {
-    if (!chartDrawdownData) {
-      fetchData(loginCode);
-    }
-  }, [chartDrawdownData, basicAnalyzeData]);
+  console.log(chartDrawdownData);
 
   return (
     <Card className="lg:col-span-4">
@@ -59,7 +47,7 @@ export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
             )}
             {chartDrawdownData && (
               <ChartContainer
-                className="aspect-auto h-[310px] w-full"
+                className="aspect-auto h-[350px] w-full"
                 config={chartDrawdownConfig}
               >
                 <LineChart
@@ -73,10 +61,11 @@ export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
                   <CartesianGrid y={1} vertical={false} />
                   <XAxis
                     dataKey="date"
-                    tickLine={true}
+                    tickLine={false}
                     axisLine={false}
                     tickMargin={8}
                     minTickGap={32}
+                    hide
                     tickFormatter={(value) => {
                       const newFormatDate = value.time?.split("T")[0];
                       const date = new Date(newFormatDate);
@@ -85,6 +74,17 @@ export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
                         day: "numeric",
                       });
                     }}
+                  />
+                  <YAxis
+                    type="number"
+                    tickLine={false}
+                    axisLine={false}
+                    tickMargin={8}
+                    minTickGap={32}
+                    allowDataOverflow={true}
+                    tickFormatter={(value) => `${value.toLocaleString()}`}
+                    tickCount={20}
+                    tickSize={5}
                   />
                   <ChartTooltip
                     cursor={false}
@@ -117,13 +117,13 @@ export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
                     strokeWidth={2}
                     dot={false}
                   />
-                  <Line
+                  {/* <Line
                     dataKey="startBalance"
                     type="monotone"
                     stroke="var(--color-startBalance)"
                     strokeWidth={2}
                     dot={false}
-                  />
+                  /> */}
                   <Line
                     dataKey="eodBalance"
                     type="monotone"
@@ -131,13 +131,13 @@ export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
                     strokeWidth={2}
                     dot={false}
                   />
-                  <Line
+                  {/* <Line
                     dataKey="matBalance"
                     type="monotone"
                     stroke="var(--color-matBalance)"
                     strokeWidth={2}
                     dot={false}
-                  />
+                  /> */}
                   <Line
                     dataKey="mdBalance"
                     type="monotone"

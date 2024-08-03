@@ -1,12 +1,12 @@
 "use client";
 
 import SearchBar from "@/components/routes/analyze/search-bar";
-import AnalyzeTabs from "@/components/routes/analyze/tabs";
-import HistoryPositionsContent from "@/components/routes/analyze/tabs/history-positions-content";
-import OverviewContent from "@/components/routes/analyze/tabs/overview-content";
+import AnalyzeTabs from "@/components/modules/analyze-tabs";
 import UserInfo from "@/components/routes/analyze/user-info";
 import { useAnalyzeTab } from "@/context/analyze-tab-context";
 import { useBasicAnalyze } from "@/context/basic-analyze-context";
+import HistoryPositionsContent from "@/components/routes/analyze/history-positions";
+import OverviewContent from "@/components/routes/analyze/overview";
 
 export default function AnalyzePage() {
   const { activeTab } = useAnalyzeTab();
