@@ -19,7 +19,7 @@ export default function AnalyzePage() {
       </div>
       <div>
         {data && (
-          <div className="flex flex-col md:flex-row items-center justify-between mt-7 mb-3">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mt-7 mb-3 gap-y-5">
             <UserInfo />
             <AnalyzeTabs />
           </div>

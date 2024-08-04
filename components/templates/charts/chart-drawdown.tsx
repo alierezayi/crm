@@ -19,7 +19,7 @@ import { useChartDrawdown } from "@/context/chart-drawdown-context";
 import { ChartArea } from "lucide-react";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
-export default function ChartDrawdown({ loginCode }: { loginCode: number }) {
+export default function ChartDrawdown() {
   const { data: chartDrawdownData, error, isLoading } = useChartDrawdown();
 
   console.log(chartDrawdownData);

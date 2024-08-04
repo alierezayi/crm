@@ -10,6 +10,7 @@ export const columns: ColumnDef<HistoryPosition>[] = [
   {
     accessorKey: "ticket",
     header: "Ticket",
+    filterFn: "includesString",
   },
   {
     accessorKey: "symbol",
@@ -30,7 +31,7 @@ export const columns: ColumnDef<HistoryPosition>[] = [
     },
     cell: ({ row }) => {
       const date = new Date(row.getValue("openTime"));
-      return <div className="">{date.toLocaleString()}</div>;
+      return <div className="">{date.toLocaleDateString()}</div>;
     },
   },
   {
@@ -40,40 +41,48 @@ export const columns: ColumnDef<HistoryPosition>[] = [
   {
     accessorKey: "volume",
     header: "Volume",
+    filterFn: "includesString",
+    // meta: {
+    //   filterVariant: "",
+    // },
   },
   {
     accessorKey: "nowPrice",
     header: "Price",
-    cell: ({ row }) => {
-      const price = parseFloat(row.getValue("nowPrice"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(price);
-
-      return <div className=" font-medium">{formatted}</div>;
-    },
+    filterFn: "includesString",
   },
   {
     accessorKey: "closeTime",
     header: "Time Close",
     cell: ({ row }) => {
       const date = new Date(row.getValue("closeTime"));
-      return <div className="">{date.toLocaleString()}</div>;
+      return <div className="">{date.toLocaleDateString()}</div>;
     },
   },
   {
     accessorKey: "positionDuration",
     header: "Duration",
-    // cell: ({ row }) => {
-    //   const duration = row.getValue("positionDuration")
+    filterFn: "includesString",
+    cell: ({ row }) => {
+      const duration: string = row.getValue("positionDuration");
+      const timeString = duration.split(".")[0];
+      const parts = timeString.split(":");
 
-    //   return <div>{duration??}</div>;
-    // },
+      if (parts.length !== 3) return;
+
+      const [hrs, mins, secs] = parts.map((part) => parseInt(part, 10));
+
+      return (
+        <div>
+          {!!hrs && `${hrs}h ,`} {!!mins && `${mins}m ,`} {!!secs && `${secs}s`}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "commission",
     header: "Commission",
+    filterFn: "includesString",
     cell: ({ row }) => {
       const commission = parseFloat(row.getValue("commission"));
 
@@ -93,9 +102,11 @@ export const columns: ColumnDef<HistoryPosition>[] = [
   {
     accessorKey: "swap",
     header: "Swap",
+    filterFn: "includesString",
   },
   {
     accessorKey: "profit",
+    filterFn: "includesString",
     header: ({ column }) => {
       return (
         <Button

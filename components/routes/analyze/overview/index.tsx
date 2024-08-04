@@ -22,12 +22,13 @@ export default function OverviewContent() {
   const nowStatus = data?.nowStatus;
   const tradeStatus = data?.countTrade;
   const propAnalyze = data?.propAnalyze;
+  console.log();
+
   const positions = data?.positions;
   const orders = data?.orders;
   const historyBalance = data?.historyBalance;
   const historyGrowth = data?.historyGrowth;
   const loginCode = data?.user.login;
-  console.log(data);
 
   useEffect(() => {
     if (error?.response?.status === 401) {
@@ -61,7 +62,7 @@ export default function OverviewContent() {
                 <TradeStatus {...tradeStatus} />
                 <NowStatus {...nowStatus} />
                 <TableContainer orders={orders} positions={positions} />
-                <ChartDrawdown loginCode={loginCode} />
+                <ChartDrawdown />
               </div>
             </div>
           )}
