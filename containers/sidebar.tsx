@@ -20,8 +20,8 @@ export default function Sidebar() {
         )}
       >
         <div className="flex justify-between items-center md:justify-start px-2 mt-2.5 mb-5">
-          <Link href="/main" className="w-full bg-gray-700 rounded-xl">
-            <Image src={images.logo} alt="logo" width={130} height={70} />
+          <Link href="/main" className="w-full bg-gray-700 rounded-xl px-4 py-2">
+            <Image src={images.logo} alt="logo" width={120} height={70} />
           </Link>
 
           <button onClick={close} className="md:hidden">

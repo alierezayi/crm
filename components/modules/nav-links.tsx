@@ -40,6 +40,8 @@ export default function NavLinks() {
   //     setLinks(filteredLinks);
   //   }
   // }, [data?.data.permissions]);
+  const stopOut = NAVLINKS.stopOut.filter((link) => link.state === 1);
+  const prop = NAVLINKS.prop.filter((link) => link.state === 1);
 
   return (
     <div className="">
@@ -49,18 +51,18 @@ export default function NavLinks() {
         </div>
       ) : (
         <Accordion type="single" collapsible className="px-2">
-          <AccordionItem value="item-1" className="pb-1">
-            <AccordionTrigger className="dark:text-white hover:bg-gray-800 dark:hover:bg-gray-900 px-3 rounded">
-              Stop Out
+          <AccordionItem value="item-2" className="">
+            <AccordionTrigger className="dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 px-3 rounded">
+              Prop
             </AccordionTrigger>
             <AccordionContent className="flex flex-col gap-0.5 dark:text-white pl-1 border-l border-gray-800 dark:border-gray-700 ml-2 mt-1">
-              {NAVLINKS.stopOut.map((item, i) => (
+              {prop.map((item, i) => (
                 <Link
                   href={item.path}
                   onClick={close}
                   key={i}
                   className={cn(
-                    "py-2 truncate text-xs font-medium hover:bg-gray-800 dark:hover:bg-gray-900 px-2.5 rounded",
+                    "py-2 truncate text-xs font-medium hover:bg-gray-700 dark:hover:bg-gray-700 px-2.5 rounded",
                     pathname === item.path && "text-blue-500"
                   )}
                 >
@@ -69,18 +71,18 @@ export default function NavLinks() {
               ))}
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="item-2" className="">
-            <AccordionTrigger className="dark:text-white hover:bg-gray-800 dark:hover:bg-gray-900 px-3 rounded">
-              Prop
+          <AccordionItem value="item-1" className="pb-1">
+            <AccordionTrigger className="dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700 px-3 rounded">
+              Stop Out
             </AccordionTrigger>
             <AccordionContent className="flex flex-col gap-0.5 dark:text-white pl-1 border-l border-gray-800 dark:border-gray-700 ml-2 mt-1">
-              {NAVLINKS.prop.map((item, i) => (
+              {stopOut.map((item, i) => (
                 <Link
                   href={item.path}
                   onClick={close}
                   key={i}
                   className={cn(
-                    "py-2 truncate text-xs font-medium hover:bg-gray-800 dark:hover:bg-gray-900 px-2.5 rounded",
+                    "py-2 truncate text-xs font-medium hover:bg-gray-700 dark:hover:bg-gray-700 px-2.5 rounded",
                     pathname === item.path && "text-blue-500"
                   )}
                 >
