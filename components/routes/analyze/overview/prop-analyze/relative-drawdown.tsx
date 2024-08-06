@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
-import { CgPerformance } from "react-icons/cg";
+import { MdOutlineShowChart } from "react-icons/md";
 import {
   PolarGrid,
   PolarRadiusAxis,
@@ -35,14 +35,10 @@ export default function LimitVolume({ value }: { value: number }) {
       <CardHeader className="pb-5">
         <CardTitle className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
-            <CgPerformance className="w-4 h-4" />
-            Limit Volume
+            <MdOutlineShowChart className="w-4 h-4" />
+            Relative Drawdown
           </div>
-          {value >= 3 ? (
-            <Badge variant="danger">Rejected</Badge>
-          ) : (
-            <Badge variant="info">Stable</Badge>
-          )}
+          <Badge variant="secondary">none</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent className="flex justify-between items-end">
@@ -50,7 +46,7 @@ export default function LimitVolume({ value }: { value: number }) {
           <RadialBarChart
             data={chartData}
             startAngle={0}
-            endAngle={value * 133.3}
+            endAngle={0 * 133.3}
             innerRadius={18}
             outerRadius={33}
           >
@@ -65,7 +61,7 @@ export default function LimitVolume({ value }: { value: number }) {
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false} />
           </RadialBarChart>
         </ChartContainer>
-        <CardDescription>{value}</CardDescription>
+        <CardDescription>{value} %</CardDescription>
       </CardContent>
     </Card>
   );

@@ -15,14 +15,9 @@ import { ChartColumnIncreasing } from "lucide-react";
 
 export default function MaxStartBalance() {
   const { data, isLoading, error } = useChartDrawdown();
-  console.log(data);
 
   const value = data?.maxStartBalanceDrawdown! * 100;
-
-  const date = `${data?.maxStartBalanceDrawdownTime.split("T")[0]} ${
-    data?.maxStartBalanceDrawdownTime.split("T")[1].split("Z")[0]
-  }`;
-
+  const date = new Date(data?.maxStartBalanceDrawdownTime as any);
   const perStartRole = data?.showChartDrawdown.perStartRole!;
 
   return (
@@ -64,7 +59,7 @@ export default function MaxStartBalance() {
                 />
                 <CardDescription className="flex justify-between gap-2 w-full mt-5 text-xs">
                   <div>{value}% drawdown</div>
-                  <div>{date}</div>
+                  <div>{date.toLocaleString()}</div>
                 </CardDescription>
               </>
             )}

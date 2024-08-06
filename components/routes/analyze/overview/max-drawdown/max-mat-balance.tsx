@@ -13,16 +13,12 @@ import { useChartDrawdown } from "@/context/chart-drawdown-context";
 import { cn } from "@/lib/utils";
 import { ChartColumnIncreasing } from "lucide-react";
 
-export default function MaxMDBalance() {
+export default function MaxMATBalance() {
   const { data, isLoading } = useChartDrawdown();
 
-  //   const value = data?.maxMDBalanceDrawdown! * 100;
-
-  //   const date = `${data?.maxMDBalanceDrawdownTime.split("T")[0]} ${
-  //     data?.maxMDBalanceDrawdownTime.split("T")[1].split("Z")[0]
-  //   }`;
-
-  const perMDRole = data?.showChartDrawdown.perMDRole!;
+  const value = data?.maxAllTimeBalanceDrawdown! * 100;
+  const date = new Date(data?.maxAllTimeBalanceDrawdownTime as any);
+  const perMATRole = data?.showChartDrawdown.perMATRole!;
 
   return (
     <Card className="w-full h-[137.5px]">
@@ -30,17 +26,9 @@ export default function MaxMDBalance() {
         <CardTitle className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
             <ChartColumnIncreasing className="w-4 h-4" />
-            MD balance max drawdown
+            MAT balance max drawdown
           </div>
-          {/* {!isLoading && (
-            <>
-              {value >= perMDRole ? (
-                <Badge variant="danger">Rejected</Badge>
-              ) : (
-                <Badge variant="info">Stable</Badge>
-              )}
-            </>
-          )} */}
+          <Badge variant="secondary">None</Badge>
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -50,19 +38,16 @@ export default function MaxMDBalance() {
           </div>
         ) : (
           <>
-            {/* <Progress
+            <Progress
               className={cn(
-                value! >= perMDRole! ? "bg-rose-600" : "bg-blue-600"
+                value! >= perMATRole! ? "bg-rose-600" : "bg-blue-600"
               )}
-              value={value * perMDRole}
+              value={value * perMATRole}
             />
-            <CardDescription className="flex justify-between gap-2 w-full mt-5">
+            <CardDescription className="flex justify-between gap-2 w-full mt-5 text-xs">
               <div>{value}% drawdown</div>
-              <div className="">{date}</div>
-            </CardDescription> */}
-            <div className="flex justify-center items-center h-full">
-              No result.
-            </div>
+              <div className="">{date.toLocaleString()}</div>
+            </CardDescription>
           </>
         )}
       </CardContent>

@@ -105,22 +105,6 @@ export default function NowStatus({
           {/* )} */}
 
           <div className="flex justify-between items-center">
-            <div>Relative Drawdown</div>
-            <div
-              className={cn(
-                relativeDrawdown > 0 && "text-green-600 dark:text-green-400",
-                relativeDrawdown < 0 && "text-rose-600 dark:text-rose-400",
-                relativeDrawdown === 0 && "text-blue-600 dark:text-blue-400",
-                "tems-center gap-2"
-              )}
-            >
-              <span>{relativeDrawdown.toFixed(2)}%</span>
-              {relativeDrawdown > 0 && <TrendingUp className="w-4 h-4" />}
-              {relativeDrawdown < 0 && <TrendingDown className="w-4 h-4" />}
-            </div>
-          </div>
-
-          <div className="flex justify-between items-center">
             <div>Start Balance Drawdown</div>
             <div
               className={cn(

@@ -24,8 +24,6 @@ export default function HistoryPositionsContent() {
     }
   }, [error]);
 
-  console.log(data);
-
   return (
     <>
       {isLoading ? (

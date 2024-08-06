@@ -1,4 +1,8 @@
-import { HistoryChartType } from "./types";
+import { ChartDrawdownType, HistoryChartType } from "./types";
+type MinMaxType = {
+  min: number;
+  max: number;
+};
 
 export const mergeCharts = (
   balanceArray: HistoryChartType[],
@@ -20,22 +24,45 @@ export const mergeCharts = (
   return data;
 };
 
-export const subtract = (value: number, digit: number) => {
-  if (value) {
-    let numberStr = value.toString();
+export const getOverallMinMax = (data: ChartDrawdownType[]) => {
+  let overallMin = Infinity;
+  let overallMax = -Infinity;
 
-    // Split the string into integer and decimal parts
-    let parts = numberStr.split(".");
-    let integerPart = parts[0];
-    let decimalPart = parts[1] || ""; // Handle case where there's no decimal part
+  data?.forEach((item) => {
+    const values = [
+      item.balance,
+      item.minEquity,
+      item.maxEquity,
+      item.startBalance,
+      item.eodBalance,
+      item.matBalance,
+      item.mdBalance,
+    ];
 
-    // Subtract 2 digits from the decimal part
-    let newDecimalPart = decimalPart.slice(digit);
+    const min = Math.min(...values);
+    const max = Math.max(...values);
 
-    // Combine the integer part and the modified decimal part
-    let newNumberStr = integerPart + "." + newDecimalPart;
-    let newNumber = parseFloat(newNumberStr);
+    if (min < overallMin) overallMin = min;
+    if (max > overallMax) overallMax = max;
+  });
 
-    return newNumber;
-  }
+  return {
+    overallMin,
+    overallMax,
+  };
 };
+
+export function getMinMaxValues(data: ChartDrawdownType[]) {
+  let overallMin = Infinity;
+  let overallMax = -Infinity;
+
+  data.forEach((entry) => {
+    overallMin = Math.min(overallMin, entry.minEquity);
+    overallMax = Math.max(overallMax, entry.maxEquity);
+  });
+
+  return {
+    overallMin,
+    overallMax,
+  };
+}

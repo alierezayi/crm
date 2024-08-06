@@ -23,9 +23,6 @@ export function BalanceChart({ chartData }: { chartData: HistoryChartType[] }) {
   const minBalance = Math.min(...balances);
   const maxBalance = Math.max(...balances);
 
-  console.log("Minimum Balance:", minBalance);
-  console.log("Maximum Balance:", maxBalance);
-
   return (
     <ChartContainer
       config={balanceChartConfig}

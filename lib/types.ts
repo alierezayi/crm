@@ -103,6 +103,7 @@ export type PropAnalyzeType = {
   dayTradeCompleteVolume: number;
   limitVolume: number;
   tradeLimitTime: number;
+  relativeDrawdown: number;
 };
 
 export type TradeStatusType = {

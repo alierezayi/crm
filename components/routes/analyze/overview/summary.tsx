@@ -14,13 +14,19 @@ function SummaryItem({ item, title }: { item: number; title: string }) {
     <>
       <div className="flex items-center justify-between mb-1 mr-0.5 text-xs font-medium">
         <span>{title}</span>
-        {item >= 0 ? (
-          <span className="text-emerald-600 dark:text-emerald-400 flex gap-2 items-center">
+        {item > 0 && (
+          <span className="text-green-600 dark:text-green-400 flex gap-2 items-center">
             {item?.toFixed(2)} <TrendingUp className="w-3.5 h-3.w-3.5" />
           </span>
-        ) : (
+        )}
+        {item < 0 && (
           <span className="text-rose-600 dark:text-rose-400 flex gap-2 items-center">
             {item?.toFixed(2)} <TrendingDown className="w-3.5 h-3.w-3.5" />
+          </span>
+        )}
+        {item === 0 && (
+          <span className="text-blue-600 dark:text-blue-400 flex gap-2 items-center">
+            {item?.toFixed(2)}
           </span>
         )}
       </div>

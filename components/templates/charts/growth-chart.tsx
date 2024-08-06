@@ -28,11 +28,7 @@ export function GrowthChart({ chartData }: { chartData: HistoryChartType[] }) {
       config={growthChartConfig}
       className="aspect-auto h-[310px] w-full"
     >
-      <AreaChart
-        accessibilityLayer
-        data={newChartData}
-        
-      >
+      <AreaChart accessibilityLayer data={newChartData}>
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey="date"
@@ -57,8 +53,8 @@ export function GrowthChart({ chartData }: { chartData: HistoryChartType[] }) {
           axisLine={false}
           tickMargin={8}
           minTickGap={32}
-          allowDataOverflow={true} 
-          tickFormatter={(value) => `$${value.toLocaleString()}`}
+          allowDataOverflow={true}
+          tickFormatter={(value) => `${value.toLocaleString()}`}
           tickCount={20}
           tickSize={5}
         />

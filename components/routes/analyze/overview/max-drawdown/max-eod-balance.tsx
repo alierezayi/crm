@@ -11,17 +11,13 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { useChartDrawdown } from "@/context/chart-drawdown-context";
 import { cn } from "@/lib/utils";
-import { ChartColumnIncreasing } from "lucide-react";
+import { ChartColumnIncreasingIcon } from "lucide-react";
 
 export default function MaxEODBalance() {
   const { data, isLoading, error } = useChartDrawdown();
 
   const value = data?.maxEODBalanceDrawdown! * 100;
-
-  const date = `${data?.maxEODBalanceDrawdownTime.split("T")[0]} ${
-    data?.maxEODBalanceDrawdownTime.split("T")[1].split("Z")[0]
-  }`;
-
+  const date = new Date(data?.maxEODBalanceDrawdownTime as any);
   const perEODRole = data?.showChartDrawdown.perEODRole!;
 
   return (
@@ -29,7 +25,7 @@ export default function MaxEODBalance() {
       <CardHeader className="pb-5">
         <CardTitle className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
-            <ChartColumnIncreasing className="w-4 h-4" />
+            <ChartColumnIncreasingIcon className="w-4 h-4" />
             EOD balance max drawdown
           </div>
           {data && (
@@ -65,7 +61,7 @@ export default function MaxEODBalance() {
                 />
                 <CardDescription className="flex justify-between gap-2 w-full mt-5 text-xs">
                   <div>{value}% drawdown</div>
-                  <div>{date}</div>
+                  <div>{date.toLocaleString()}</div>
                 </CardDescription>
               </>
             )}

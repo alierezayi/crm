@@ -16,13 +16,26 @@ import {
 } from "@/components/ui/chart";
 import { chartDrawdownConfig } from "@/configs/chart";
 import { useChartDrawdown } from "@/context/chart-drawdown-context";
+import { getMinMaxValues, getOverallMinMax } from "@/lib/helper";
 import { ChartArea } from "lucide-react";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
+
+interface Balances {
+  balance: number[];
+  eodBalance: number[];
+  matBalance: number[];
+  maxEquity: number[];
+  mdBalance: number[];
+  minEquity: number[];
+  startBalance: number[];
+}
 
 export default function ChartDrawdown() {
   const { data: chartDrawdownData, error, isLoading } = useChartDrawdown();
 
-  console.log(chartDrawdownData);
+  const chartDrawdown = chartDrawdownData?.chartDrawdown || [];
+
+  const { overallMax, overallMin } = getMinMaxValues(chartDrawdown);
 
   return (
     <Card className="lg:col-span-4">
@@ -81,6 +94,7 @@ export default function ChartDrawdown() {
                     axisLine={false}
                     tickMargin={8}
                     minTickGap={32}
+                    domain={[overallMin, overallMax]}
                     allowDataOverflow={true}
                     tickFormatter={(value) => `${value.toLocaleString()}`}
                     tickCount={20}
@@ -117,13 +131,13 @@ export default function ChartDrawdown() {
                     strokeWidth={2}
                     dot={false}
                   />
-                  {/* <Line
+                  <Line
                     dataKey="startBalance"
                     type="monotone"
                     stroke="var(--color-startBalance)"
                     strokeWidth={2}
                     dot={false}
-                  /> */}
+                  />
                   <Line
                     dataKey="eodBalance"
                     type="monotone"
@@ -131,13 +145,13 @@ export default function ChartDrawdown() {
                     strokeWidth={2}
                     dot={false}
                   />
-                  {/* <Line
+                  <Line
                     dataKey="matBalance"
                     type="monotone"
                     stroke="var(--color-matBalance)"
                     strokeWidth={2}
                     dot={false}
-                  /> */}
+                  />
                   <Line
                     dataKey="mdBalance"
                     type="monotone"

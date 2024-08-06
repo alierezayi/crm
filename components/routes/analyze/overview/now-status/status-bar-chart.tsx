@@ -54,14 +54,14 @@ export function StatusBarChart({
       fill: "var(--color-equity)",
     },
     {
-      metric: "balance",
-      value: balance,
-      fill: "var(--color-balance)",
-    },
-    {
       metric: "profit",
       value: profit,
       fill: "var(--color-profit)",
+    },
+    {
+      metric: "balance",
+      value: balance,
+      fill: "var(--color-balance)",
     },
     {
       metric: "margin",
@@ -82,7 +82,7 @@ export function StatusBarChart({
         data={chartData}
         layout="vertical"
         margin={{
-          right: 0,
+          right: 50,
         }}
       >
         <YAxis
@@ -104,9 +104,9 @@ export function StatusBarChart({
         <Bar dataKey="value" layout="vertical" radius={5}>
           <LabelList
             dataKey="value"
-            // position="insideEnd"
+            position="right"
             offset={8}
-            className="fill-[#ffffff] font-medium"
+            className="fill-foreground"
             fontSize={12}
           />
         </Bar>
