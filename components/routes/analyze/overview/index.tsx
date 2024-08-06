@@ -23,13 +23,11 @@ export default function OverviewContent() {
   const nowStatus = data?.nowStatus;
   const tradeStatus = data?.countTrade;
   const propAnalyze = data?.propAnalyze;
-  console.log();
 
   const positions = data?.positions;
   const orders = data?.orders;
   const historyBalance = data?.historyBalance;
   const historyGrowth = data?.historyGrowth;
-  const loginCode = data?.user.login;
 
   const newPropAnalyze = {
     ...propAnalyze,

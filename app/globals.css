@@ -51,6 +51,11 @@
     --chart-7: 293, 69%, 49%;
     --chart-area-balance: 220 70% 50%;
     --chart-area-growth: 293, 69%, 49%;
+    --chart-line-min-equity: 30 80% 55%;
+    --chart-line-max-equity: 340 75% 55%;
+    --chart-line-eod-balance: 160, 84%, 39%;
+    --chart-line-mat-balance: 189, 94%, 43%;
+    --chart-line-md-balance: 271, 81%, 56%;
   }
 
   .dark {

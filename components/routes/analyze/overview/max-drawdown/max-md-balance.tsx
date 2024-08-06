@@ -53,7 +53,7 @@ export default function MaxMDBalance() {
               value={value * perMDRole}
             />
             <CardDescription className="flex justify-between gap-2 w-full mt-5 text-xs">
-              <div>{value}% drawdown</div>
+              <div>{value.toFixed(2)}% drawdown</div>
               <div className="">{date.toLocaleString()}</div>
             </CardDescription>
           </>

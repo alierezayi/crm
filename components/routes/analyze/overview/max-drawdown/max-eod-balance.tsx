@@ -60,7 +60,7 @@ export default function MaxEODBalance() {
                   value={value * perEODRole}
                 />
                 <CardDescription className="flex justify-between gap-2 w-full mt-5 text-xs">
-                  <div>{value}% drawdown</div>
+                  <div>{value.toFixed(2)}% drawdown</div>
                   <div>{date.toLocaleString()}</div>
                 </CardDescription>
               </>
