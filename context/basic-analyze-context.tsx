@@ -1,4 +1,4 @@
-import { basicAnalyseAPI } from "@/services/prop-account-analyze";
+import { basicAnalyseAPI } from "@/services/analyze";
 import { AxiosError } from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 

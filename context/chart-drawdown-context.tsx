@@ -1,5 +1,5 @@
 import { ChartDrawdownAnalyzeType } from "@/lib/types";
-import { chartDrawdownAnalyzeAPI } from "@/services/prop-account-analyze";
+import { chartDrawdownAnalyzeAPI } from "@/services/analyze";
 import { AxiosError } from "axios";
 import { createContext, useContext, useState } from "react";
 

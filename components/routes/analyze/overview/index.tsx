@@ -51,12 +51,12 @@ export default function OverviewContent() {
       ) : (
         <>
           {error && error?.response?.status !== 400 && (
-            <Error message="Unexpected error." />
+            <Error message={error.message} />
           )}
           {error?.response?.status === 400 && <div>User not founded.</div>}
           {data && (
             <div className="mt-8">
-              <PropAnalyze {...newPropAnalyze} />
+              {data?.user.isProp ? <PropAnalyze {...newPropAnalyze} /> : null}
               <MaxDrawdown />
               <div className="grid grid-cols-1 lg:grid-cols-4 mt-5 gap-y-5 gap-x-3">
                 <Summary {...summary} />

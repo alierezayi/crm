@@ -8,8 +8,14 @@ import { useBasicAnalyze } from "@/context/basic-analyze-context";
 import { useAnalyzeTab } from "@/context/analyze-tab-context";
 import { useHistoryPositions } from "@/context/history-positions-context";
 import { useChartDrawdown } from "@/context/chart-drawdown-context";
+import { useQuery } from "@tanstack/react-query";
+import { getInvestorsAPI } from "@/services/copy-trade";
 
 export default function SearchBar() {
+  const { data, error, refetch } = useQuery({
+    queryKey: ["investors"],
+    queryFn: getInvestorsAPI,
+  });
   const [loginCode, setLoginCode] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,15 +32,16 @@ export default function SearchBar() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    if (!!loginCode && loginCode !== basicAnalyzeData?.user.login) {
+    if (!!loginCode) {
       setIsLoading(true);
       setActiveTab("Overview");
       fetchBasicAnalyze(loginCode);
       fetchChartDrawdown(loginCode);
       setTimeout(() => {
         fetchHistoryPositions(loginCode);
-      }, 3000);
+      }, 1000);
       setIsLoading(false);
+      refetch();
     }
   };
 

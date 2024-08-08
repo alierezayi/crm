@@ -79,7 +79,6 @@ export default function ChartDrawdown() {
     Object.values(item).some((value) => value !== 0);
 
   const newChartDrawdown = chartDrawdown.filter(hasNonZeroBalance);
-  console.log(chartDrawdownData);
 
   const { overallMax, overallMin } = getMinMaxValues(newChartDrawdown);
 
@@ -128,7 +127,6 @@ export default function ChartDrawdown() {
                     size="sm"
                     onClick={() => toggleLine("maxEquity")}
                     pressed={selectedLines.includes("maxEquity")}
-
                   >
                     maxEquity
                   </Toggle>
@@ -137,7 +135,6 @@ export default function ChartDrawdown() {
                     size="sm"
                     onClick={() => toggleLine("startBalance")}
                     pressed={selectedLines.includes("startBalance")}
-
                   >
                     startBalance
                   </Toggle>
@@ -146,7 +143,6 @@ export default function ChartDrawdown() {
                     size="sm"
                     onClick={() => toggleLine("eodBalance")}
                     pressed={selectedLines.includes("eodBalance")}
-
                   >
                     eodBalance
                   </Toggle>
@@ -155,7 +151,6 @@ export default function ChartDrawdown() {
                     size="sm"
                     onClick={() => toggleLine("matBalance")}
                     pressed={selectedLines.includes("matBalance")}
-
                   >
                     matBalance
                   </Toggle>
@@ -164,7 +159,6 @@ export default function ChartDrawdown() {
                     size="sm"
                     onClick={() => toggleLine("mdBalance")}
                     pressed={selectedLines.includes("mdBalance")}
-
                   >
                     mdBalance
                   </Toggle>
@@ -204,7 +198,7 @@ export default function ChartDrawdown() {
                       axisLine={false}
                       tickMargin={8}
                       minTickGap={32}
-                      domain={[8000, overallMax]}
+                      domain={[17900, overallMax]}
                       allowDataOverflow={true}
                       tickFormatter={(value) => `${value.toLocaleString()}`}
                       tickCount={20}

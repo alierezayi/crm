@@ -7,6 +7,7 @@ import { useAnalyzeTab } from "@/context/analyze-tab-context";
 import { useBasicAnalyze } from "@/context/basic-analyze-context";
 import HistoryPositionsContent from "@/components/routes/analyze/history-positions";
 import OverviewContent from "@/components/routes/analyze/overview";
+import CopyTradeAction from "@/components/routes/analyze/copy-trade";
 
 export default function AnalyzePage() {
   const { activeTab } = useAnalyzeTab();
@@ -14,8 +15,9 @@ export default function AnalyzePage() {
 
   return (
     <div>
-      <div className="my-3">
+      <div className="my-3 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-y-5">
         <SearchBar />
+        {data?.user.login ? <CopyTradeAction /> : null}
       </div>
       <div>
         {data && (

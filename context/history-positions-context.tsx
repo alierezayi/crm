@@ -1,4 +1,4 @@
-import { historyPositionsAPI } from "@/services/prop-account-analyze";
+import { historyPositionsAPI } from "@/services/analyze";
 import { AxiosError } from "axios";
 import { createContext, useContext, useState } from "react";
 

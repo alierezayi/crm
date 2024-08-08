@@ -8,9 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { useChartDrawdown } from "@/context/chart-drawdown-context";
-import { cn } from "@/lib/utils";
 import { ChartColumnIncreasingIcon } from "lucide-react";
 import MaxDrawdownProgress from "./max-drawdown-progress";
 
@@ -54,11 +52,8 @@ export default function MaxEODBalance() {
             )}
             {data && (
               <>
-                <MaxDrawdownProgress
-                  role={perEODRole}
-                  value={value}
-                />
-                <CardDescription className="flex justify-between gap-2 w-full mt-5 text-xs">
+                <MaxDrawdownProgress role={perEODRole} value={value} />
+                <CardDescription className="flex justify-between gap-2 w-full mt-5 text-xs truncate">
                   <div>{value.toFixed(2)}% drawdown</div>
                   <div>{date.toLocaleString()}</div>
                 </CardDescription>
