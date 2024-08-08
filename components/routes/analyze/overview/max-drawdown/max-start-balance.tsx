@@ -12,6 +12,7 @@ import { Progress } from "@/components/ui/progress";
 import { useChartDrawdown } from "@/context/chart-drawdown-context";
 import { cn } from "@/lib/utils";
 import { ChartColumnIncreasing } from "lucide-react";
+import MaxDrawdownProgress from "./max-drawdown-progress";
 
 export default function MaxStartBalance() {
   const { data, isLoading, error } = useChartDrawdown();
@@ -51,12 +52,7 @@ export default function MaxStartBalance() {
             )}
             {data && (
               <>
-                <Progress
-                  className={cn(
-                    value! >= perStartRole! ? "bg-rose-600" : "bg-blue-600"
-                  )}
-                  value={value * perStartRole}
-                />
+                <MaxDrawdownProgress role={perStartRole} value={value} />
                 <CardDescription className="flex justify-between gap-2 w-full mt-5 text-xs">
                   <div>{value.toFixed(2)}% drawdown</div>
                   <div>{date.toLocaleString()}</div>

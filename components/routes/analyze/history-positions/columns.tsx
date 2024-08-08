@@ -15,6 +15,7 @@ export const columns: ColumnDef<HistoryPosition>[] = [
   {
     accessorKey: "symbol",
     header: "Symbol",
+    filterFn: "includesString",
   },
   {
     accessorKey: "openTime",
@@ -41,15 +42,10 @@ export const columns: ColumnDef<HistoryPosition>[] = [
   {
     accessorKey: "volume",
     header: "Volume",
-    filterFn: "includesString",
-    // meta: {
-    //   filterVariant: "",
-    // },
   },
   {
     accessorKey: "nowPrice",
     header: "Price",
-    filterFn: "includesString",
   },
   {
     accessorKey: "closeTime",
@@ -62,7 +58,6 @@ export const columns: ColumnDef<HistoryPosition>[] = [
   {
     accessorKey: "positionDuration",
     header: "Duration",
-    filterFn: "includesString",
     cell: ({ row }) => {
       const duration: string = row.getValue("positionDuration");
       const timeString = duration.split(".")[0];
@@ -82,7 +77,6 @@ export const columns: ColumnDef<HistoryPosition>[] = [
   {
     accessorKey: "commission",
     header: "Commission",
-    filterFn: "includesString",
     cell: ({ row }) => {
       const commission = parseFloat(row.getValue("commission"));
 
@@ -102,11 +96,9 @@ export const columns: ColumnDef<HistoryPosition>[] = [
   {
     accessorKey: "swap",
     header: "Swap",
-    filterFn: "includesString",
   },
   {
     accessorKey: "profit",
-    filterFn: "includesString",
     header: ({ column }) => {
       return (
         <Button

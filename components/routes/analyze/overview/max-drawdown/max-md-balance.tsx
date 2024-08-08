@@ -12,13 +12,14 @@ import { Progress } from "@/components/ui/progress";
 import { useChartDrawdown } from "@/context/chart-drawdown-context";
 import { cn } from "@/lib/utils";
 import { ChartColumnIncreasing } from "lucide-react";
+import MaxDrawdownProgress from "./max-drawdown-progress";
 
 export default function MaxMDBalance() {
   const { data, isLoading } = useChartDrawdown();
 
   const value = data?.maxDayBalanceDrawdown! * 100;
   const date = new Date(data?.maxDayBalanceDrawdownTime as any);
-  const perMDRole = data?.showChartDrawdown.perMATRole!;
+  const perMDRole = data?.showChartDrawdown.perMDRole!;
 
   return (
     <Card className="w-full h-[137.5px]">
@@ -46,11 +47,9 @@ export default function MaxMDBalance() {
           </div>
         ) : (
           <>
-            <Progress
-              className={cn(
-                value! >= perMDRole! ? "bg-rose-600" : "bg-blue-600"
-              )}
-              value={value * perMDRole}
+            <MaxDrawdownProgress
+              role={perMDRole}
+              value={value}
             />
             <CardDescription className="flex justify-between gap-2 w-full mt-5 text-xs">
               <div>{value.toFixed(2)}% drawdown</div>

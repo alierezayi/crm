@@ -16,7 +16,7 @@ export default function AnalyzeProviders({
       <ChartDrawdownProvider>
         <HistoryPositionsProvider>
           <AnalyzeTabProvider>
-            <Suspense>{children}</Suspense>
+            {children}
           </AnalyzeTabProvider>
         </HistoryPositionsProvider>
       </ChartDrawdownProvider>

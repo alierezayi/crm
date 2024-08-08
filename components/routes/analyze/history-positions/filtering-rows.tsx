@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { useState } from "react";
@@ -6,7 +8,7 @@ export default function FilteringRows() {
   const [openTime, setOpenTime] = useState<Date>();
   return (
     <>
-      {/* <TableRow>
+      <TableRow>
               <TableCell className="p-1.5">
                 <Input
                   type="number"
@@ -200,7 +202,7 @@ export default function FilteringRows() {
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>
-            </TableRow> */}
+            </TableRow>
     </>
   );
 }

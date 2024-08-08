@@ -8,32 +8,6 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const chartConfig = {
-  value: {
-    label: "Value",
-  },
-  equity: {
-    label: "Equity",
-    color: "hsl(var(--chart-1))",
-  },
-  profit: {
-    label: "Profit",
-    color: "hsl(var(--chart-2))",
-  },
-  balance: {
-    label: "Balance",
-    color: "hsl(var(--chart-3))",
-  },
-  margin: {
-    label: "Margin",
-    color: "hsl(var(--chart-4))",
-  },
-  freeMargin: {
-    label: "Free Margin",
-    color: "hsl(var(--chart-5))",
-  },
-} satisfies ChartConfig;
-
 export function StatusBarChart({
   balance,
   margin,
@@ -47,6 +21,34 @@ export function StatusBarChart({
   equity: number;
   freeMargin: number;
 }) {
+  const newProfit = profit < 0 ? Math.abs(profit) : profit;
+
+  const chartConfig = {
+    value: {
+      label: "Value",
+    },
+    equity: {
+      label: "Equity",
+      color: "hsl(var(--chart-area-balance))",
+    },
+    profit: {
+      label: "Profit",
+      color: `hsl(var(${profit >= 0 ? "--chart-2" : "--chart-status-profit"}))`,
+    },
+    balance: {
+      label: "Balance",
+      color: "hsl(var(--chart-status-balance))",
+    },
+    margin: {
+      label: "Margin",
+      color: "hsl(var(--chart-line-md-balance))",
+    },
+    freeMargin: {
+      label: "Free Margin",
+      color: "hsl(var(--chart-line-max-equity))",
+    },
+  } satisfies ChartConfig;
+
   const chartData = [
     {
       metric: "equity",
@@ -55,7 +57,7 @@ export function StatusBarChart({
     },
     {
       metric: "profit",
-      value: profit,
+      value: newProfit,
       fill: "var(--color-profit)",
     },
     {

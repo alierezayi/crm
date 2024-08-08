@@ -79,9 +79,9 @@ export default function ChartDrawdown() {
     Object.values(item).some((value) => value !== 0);
 
   const newChartDrawdown = chartDrawdown.filter(hasNonZeroBalance);
-  console.log(newChartDrawdown);
+  console.log(chartDrawdownData);
 
-  const { overallMax, overallMin } = getMinMaxValues(chartDrawdown);
+  const { overallMax, overallMin } = getMinMaxValues(newChartDrawdown);
 
   return (
     <Card className="lg:col-span-4">
@@ -100,7 +100,7 @@ export default function ChartDrawdown() {
         ) : (
           <>
             {error && (
-              <div className="flex items-center justify-center w-full h-[310px]">
+              <div className="flex items-center justify-center w-full h-[400px]">
                 <span>{error.message}</span>
               </div>
             )}
@@ -175,7 +175,7 @@ export default function ChartDrawdown() {
                 >
                   <LineChart
                     accessibilityLayer
-                    data={chartDrawdownData.chartDrawdown}
+                    data={newChartDrawdown}
                     margin={{
                       left: 12,
                       right: 12,
@@ -204,7 +204,7 @@ export default function ChartDrawdown() {
                       axisLine={false}
                       tickMargin={8}
                       minTickGap={32}
-                      domain={[overallMin, overallMax]}
+                      domain={[8000, overallMax]}
                       allowDataOverflow={true}
                       tickFormatter={(value) => `${value.toLocaleString()}`}
                       tickCount={20}
