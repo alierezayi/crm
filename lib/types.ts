@@ -97,6 +97,15 @@ export type UserInfoType = {
   eMail: string;
   isProp: boolean;
 };
+export type UserIPsType = {
+  login: number;
+  ipAddress: string;
+  type: string;
+  build: number;
+  time: string;
+  computerID: string;
+  mqid: string;
+};
 
 export type PropAnalyzeType = {
   dayTrade: number;

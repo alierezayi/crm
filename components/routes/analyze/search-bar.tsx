@@ -10,14 +10,18 @@ import { useHistoryPositions } from "@/context/history-positions-context";
 import { useChartDrawdown } from "@/context/chart-drawdown-context";
 import { useQuery } from "@tanstack/react-query";
 import { getInvestorsAPI } from "@/services/copy-trade";
+import { useUserIPs } from "@/context/user-ips-context";
 
 export default function SearchBar() {
-  const { data, error, refetch } = useQuery({
+  const { refetch } = useQuery({
     queryKey: ["investors"],
     queryFn: getInvestorsAPI,
   });
   const [loginCode, setLoginCode] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { fetchData: fetchUserIPs, data: UserIPsData } = useUserIPs();
+  console.log(UserIPsData);
 
   const { fetchData: fetchBasicAnalyze, data: basicAnalyzeData } =
     useBasicAnalyze();
@@ -40,8 +44,11 @@ export default function SearchBar() {
       setTimeout(() => {
         fetchHistoryPositions(loginCode);
       }, 1000);
-      setIsLoading(false);
       refetch();
+      setTimeout(() => {
+        fetchUserIPs(loginCode);
+      }, 2000);
+      setIsLoading(false);
     }
   };
 

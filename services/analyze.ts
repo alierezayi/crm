@@ -54,3 +54,15 @@ export const historyPositionsAPI = async (
     }
   }
 };
+export const userIPsAPI = async (code: number): Promise<ResponseType> => {
+  try {
+    const response = await api.post("PropAccountAnalyze/UserIps", code);
+    return { res: response };
+  } catch (error) {
+    if (isAxiosError(error)) {
+      return { error };
+    } else {
+      throw error;
+    }
+  }
+};

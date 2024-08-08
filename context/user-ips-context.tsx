@@ -1,28 +1,24 @@
-import { historyPositionsAPI } from "@/services/analyze";
+import { UserIPsType } from "@/lib/types";
+import { userIPsAPI } from "@/services/analyze";
 import { AxiosError } from "axios";
 import { createContext, useContext, useState } from "react";
 
 type StateType = {
   isLoading: boolean;
-  data: any;
+  data: UserIPsType[] | undefined;
   error: any;
 };
 
-type HistoryPositionsContextType = {
-  data: any;
+type UserIPsContextType = {
+  data: UserIPsType[] | undefined;
   isLoading: boolean;
   error: AxiosError;
   fetchData: (code: number) => void;
 };
 
-const HistoryPositionsContext =
-  createContext<HistoryPositionsContextType | null>(null);
+const UserIPsContext = createContext<UserIPsContextType | null>(null);
 
-const HistoryPositionsProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const UserIPsProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, setState] = useState<StateType>({
     isLoading: true,
     data: undefined,
@@ -32,7 +28,7 @@ const HistoryPositionsProvider = ({
   const fetchData = async (code: number) => {
     setState((prev) => ({ ...prev, isLoading: true }));
 
-    const { res, error } = await historyPositionsAPI(code);
+    const { res, error } = await userIPsAPI(code);
 
     if (res) {
       setState({ isLoading: false, data: res.data, error: null });
@@ -44,21 +40,19 @@ const HistoryPositionsProvider = ({
   };
 
   return (
-    <HistoryPositionsContext.Provider value={{ ...state, fetchData }}>
+    <UserIPsContext.Provider value={{ ...state, fetchData }}>
       {children}
-    </HistoryPositionsContext.Provider>
+    </UserIPsContext.Provider>
   );
 };
 
-export default HistoryPositionsProvider;
+export default UserIPsProvider;
 
-export function useHistoryPositions() {
-  const context = useContext(HistoryPositionsContext);
+export function useUserIPs() {
+  const context = useContext(UserIPsContext);
 
   if (context === null) {
-    throw new Error(
-      "useHistoryPositions must be used within an HistoryPositionsProvider"
-    );
+    throw new Error("useUserIPs must be used within an UserIPsProvider");
   }
 
   return context;

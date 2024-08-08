@@ -8,6 +8,7 @@ import { useBasicAnalyze } from "@/context/basic-analyze-context";
 import HistoryPositionsContent from "@/components/routes/analyze/history-positions";
 import OverviewContent from "@/components/routes/analyze/overview";
 import CopyTradeAction from "@/components/routes/analyze/copy-trade";
+import UserIPsContent from "@/components/routes/analyze/user-ips";
 
 export default function AnalyzePage() {
   const { activeTab } = useAnalyzeTab();
@@ -28,7 +29,7 @@ export default function AnalyzePage() {
         )}
         {activeTab === "Overview" && <OverviewContent />}
         {activeTab === "History Positions" && <HistoryPositionsContent />}
-        {activeTab === "User IPs" && <div>user-ips</div>}
+        {activeTab === "User IPs" && <UserIPsContent />}
       </div>
     </div>
   );
